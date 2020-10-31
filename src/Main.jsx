@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SimplePaper from './components/SimplePaper';
 import Footer from './components/Footer';
-import Page2 from './pages/Page2';
+import Page1 from './pages/Page1';
 import mediaQueries from './mediaQueries';
 
 
@@ -16,10 +16,10 @@ const Main = (props) => {
     <div className={classes.container}>
       <div className={classes.main}>
         {(isMobile)
-          ? <Page2 />
+          ? <Page1 />
           : (
             <SimplePaper>
-              <Page2 />
+              <Page1 />
             </SimplePaper>
           )
         }

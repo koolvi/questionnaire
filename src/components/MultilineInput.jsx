@@ -13,7 +13,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '400px',
+    // width: '400px',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
     },
@@ -26,7 +26,7 @@ const styles = theme => ({
 
 class MultilineInput extends React.Component {
   render() {
-    const { classes, label } = this.props;
+    const { classes, label, size } = this.props;
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
@@ -36,6 +36,7 @@ class MultilineInput extends React.Component {
           // placeholder="Введите текст..."
           multiline
           className={classes.textField}
+          style={{ width: (size === 'small' ? '180px' : '400px') }}
           margin="normal"
           variant="outlined"
           rowsMax={50}
