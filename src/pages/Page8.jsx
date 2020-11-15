@@ -1,39 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import MultilineInput from '../components/MultilineInput';
 import colors from '../style/colors';
 import Button from '../components/Button';
+import RadioGroup from '../components/RadioGroup';
 import mediaQueries from '../mediaQueries';
 
-const Page1 = (props) => {
+
+const Page8 = (props) => {
   const { classes, onClickNext } = props;
-  const [answer, setAnswer] = useState({
-    id: 1,
-    name: '',
-    email: '',
-    phone: '',
-  });
+  const answer = {};
 
   return (
     <div className={classes.container}>
       <div className={classes.guestion}>
-        1) Тут написан какой-то приветствующий текст, который предлагает пройти тест из 40+ вопросов
+        8) Требуется ли замена входных дверей?
       </div>
       <div className={classes.answer}>
-        <MultilineInput
-          label="ФИО"
-          value={answer.name}
-          onChange={writingText => setAnswer({ ...answer, name: writingText })}
-        />
-        <MultilineInput
-          label="Email"
-          value={answer.email}
-          onChange={writingText => setAnswer({ ...answer, email: writingText })}
-        />
-        <MultilineInput
-          label="Контактный телефон"
-          value={answer.phone}
-          onChange={writingText => setAnswer({ ...answer, phone: writingText })}
+        <RadioGroup
+          answerVariants={[
+            { id: 0, value: 'Да', label: 'Да' },
+            { id: 1, value: 'Нет', label: 'Нет' },
+          ]}
         />
       </div>
       <Button onClick={() => onClickNext(answer)} />
@@ -74,15 +61,17 @@ const styles = {
   },
   answer: {
     marginBottom: '50px',
-    display: 'flex',
-    flexDirection: 'column',
-    [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
-      // paddingTop: '30px',
-      // paddingRight: '30px',
-    },
+    // display: 'flex',
+    // flexDirection: 'column',
+    // height: '140px',
+    // background: 'red',
+    // [`@media ${mediaQueries.mobile}`]: {
+    //   width: '100%',
+    //   flex: 1,
+    //   // paddingTop: '30px',
+    //   // paddingRight: '30px',
+    // },
   },
 };
 
-export default withStyles(styles)(Page1);
+export default withStyles(styles)(Page8);

@@ -1,42 +1,51 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import MultilineInput from '../components/MultilineInput';
 import colors from '../style/colors';
 import Button from '../components/Button';
-import mediaQueries from '../mediaQueries';
+import RadioGroup from '../components/RadioGroup';
 import Select from '../components/Select';
+import mediaQueries from '../mediaQueries';
 
-const Page2 = (props) => {
+
+const Page9 = (props) => {
   const { classes, onClickNext } = props;
   const answer = {};
 
   return (
     <div className={classes.container}>
       <div className={classes.guestion}>
-        2) Заполните поля
+        9) Требуется ли замена окон?
       </div>
       <div className={classes.answer}>
-        <MultilineInput label="Адрес объекта" />
-        <MultilineInput label="Площадь" />
-        {/* <div className={classes.containerSmallInput}>
-          <MultilineInput label="Количество комнат" size="small" />
-          <MultilineInput label="Этаж" size="small" />
-        </div> */}
-        <Select label="Количество комнат">
-          {/* <MenuItem value="">
-            <em>None</em>
-          </MenuItem> */}
-          <MenuItem value={0}>Студия</MenuItem>
+        <RadioGroup
+          answerVariants={[
+            { id: 0, value: 'Да', label: 'Да' },
+            { id: 1, value: 'Нет', label: 'Нет' },
+          ]}
+        />
+        <Select label="Количество окон">
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>
           <MenuItem value={4}>4</MenuItem>
           <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>Более 5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={11}>11</MenuItem>
+          <MenuItem value={12}>12</MenuItem>
+          <MenuItem value={13}>13</MenuItem>
+          <MenuItem value={14}>14</MenuItem>
+          <MenuItem value={15}>15</MenuItem>
+          <MenuItem value={16}>16</MenuItem>
+          <MenuItem value={17}>17</MenuItem>
+          <MenuItem value={18}>18</MenuItem>
+          <MenuItem value={19}>19</MenuItem>
+          <MenuItem value={20}>20</MenuItem>
         </Select>
-
-        <MultilineInput label="Этаж" />
       </div>
       <Button onClick={() => onClickNext(answer)} />
     </div>
@@ -76,19 +85,17 @@ const styles = {
   },
   answer: {
     marginBottom: '50px',
-    display: 'flex',
-    flexDirection: 'column',
-    [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
-      // paddingTop: '30px',
-      // paddingRight: '30px',
-    },
+    // display: 'flex',
+    // flexDirection: 'column',
+    // height: '140px',
+    // background: 'red',
+    // [`@media ${mediaQueries.mobile}`]: {
+    //   width: '100%',
+    //   flex: 1,
+    //   // paddingTop: '30px',
+    //   // paddingRight: '30px',
+    // },
   },
-  // containerSmallInput: {
-  //   display: 'flex',
-  //   // justifyContent: 'space-between',
-  // },
 };
 
-export default withStyles(styles)(Page2);
+export default withStyles(styles)(Page9);
