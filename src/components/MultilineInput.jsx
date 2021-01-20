@@ -5,15 +5,16 @@ import mediaQueries from '../mediaQueries';
 import colors from '../style/colors';
 
 
-const styles = theme => ({
+const styles = () => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    width: '100%',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '400px',
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
+    width: '100%',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
     },
@@ -29,7 +30,7 @@ class MultilineInput extends React.Component {
     const { classes, label, onChange } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
+      <form className={classes.container}>
         <TextField
           id="outlined-textarea"
           label={label}
@@ -40,7 +41,7 @@ class MultilineInput extends React.Component {
           margin="normal"
           variant="outlined"
           rowsMax={50}
-          inputProps={{ min: 0, style: { textAlign: 'center' } }}
+          // inputProps={{ min: 0, style: { textAlign: 'center' } }}
           onChange={(e) => {
             onChange(e.target.value);
           }}

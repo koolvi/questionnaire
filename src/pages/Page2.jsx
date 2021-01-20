@@ -1,94 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import MultilineInput from '../components/MultilineInput';
-import colors from '../style/colors';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextFieldInput from '../components/TextFieldInput';
 import Button from '../components/Button';
 import mediaQueries from '../mediaQueries';
 import Select from '../components/Select';
+import QuestionCardLayout from '../components/QuestionCardLayout/index';
+
 
 const Page2 = (props) => {
   const { classes, onClickNext } = props;
-  const answer = {};
+  const [answer, setAnswer] = useState({
+    id: 2,
+    address: '',
+    square: '',
+    floor: '',
+    roomsCount: '',
+  });
 
   return (
-    <div className={classes.container}>
-      <div className={classes.guestion}>
-        2) Заполните поля
-      </div>
+    <QuestionCardLayout
+      questionNumber={answer.id}
+      questionText="Напишите информацию об объекте"
+    >
       <div className={classes.answer}>
-        <MultilineInput label="Адрес объекта" />
-        <MultilineInput label="Площадь" />
-        {/* <div className={classes.containerSmallInput}>
-          <MultilineInput label="Количество комнат" size="small" />
-          <MultilineInput label="Этаж" size="small" />
-        </div> */}
-        <Select label="Количество комнат">
-          {/* <MenuItem value="">
-            <em>None</em>
-          </MenuItem> */}
-          <MenuItem value={0}>Студия</MenuItem>
+        <TextFieldInput
+          label="Адрес объекта"
+          value={answer.address}
+          onChange={writingText => setAnswer({ ...answer, address: writingText })}
+        />
+        <div className={classes.containerInputs}>
+          <div className={classes.containerSquare}>
+            <TextFieldInput
+              label="Площадь"
+              value={answer.square}
+              onChange={writingText => setAnswer({ ...answer, square: writingText })}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">Кв.м.</InputAdornment>,
+              }}
+            />
+          </div>
+
+          <div className={classes.containerFloor}>
+            <TextFieldInput
+              label="Этаж"
+              value={answer.floor}
+              onChange={writingText => setAnswer({ ...answer, floor: writingText })}
+            />
+          </div>
+        </div>
+
+        <Select
+          label="Количество комнат"
+          value={answer.roomsCount}
+          onChange={e => setAnswer({ ...answer, roomsCount: e.target.value })}
+        >
+          <MenuItem value="Студия">Студия</MenuItem>
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>
           <MenuItem value={4}>4</MenuItem>
           <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>Более 5</MenuItem>
+          <MenuItem value="Более 5">Более 5</MenuItem>
         </Select>
 
-        <MultilineInput label="Этаж" />
       </div>
       <Button onClick={() => onClickNext(answer)} />
-    </div>
+    </QuestionCardLayout>
   );
 };
 
 const styles = {
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    [`@media ${mediaQueries.mobile}`]: {
-      height: 'auto',
-      flex: 1,
-      width: '100%',
-      // paddingLeft: '10px',
-      paddingTop: '30px',
-      // paddingRight: '10px',
-    },
-  },
-  guestion: {
-    color: colors.PRIMARY,
-    fontWeight: 600,
-    paddingBottom: '20px',
-    fontSize: '16px',
-    [`@media ${mediaQueries.mobile}`]: {
-      // fontSize: '14px',
-      // width: '100%',
-      // lineHeight: '10px',
-      // wordSpacing: '3px',
-      paddingLeft: '20px',
-      // paddingTop: '30px',
-      paddingRight: '20px',
-    },
-  },
   answer: {
     marginBottom: '50px',
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,
-      // paddingTop: '30px',
-      // paddingRight: '30px',
     },
   },
-  // containerSmallInput: {
-  //   display: 'flex',
-  //   // justifyContent: 'space-between',
-  // },
+  containerInputs: {
+    display: 'flex',
+  },
+  containerSquare: {
+    flex: 1,
+    marginRight: '10px',
+  },
+  containerFloor: {
+    flex: 1,
+    marginLeft: '10px',
+  },
 };
 
 export default withStyles(styles)(Page2);

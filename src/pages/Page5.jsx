@@ -1,67 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MultilineInput from '../components/MultilineInput';
-import colors from '../style/colors';
 import Button from '../components/Button';
 import mediaQueries from '../mediaQueries';
+import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page5 = (props) => {
   const { classes, onClickNext } = props;
-  const answer = {};
+  const [answer, setAnswer] = useState({
+    id: 5,
+    answer: '',
+  });
 
   return (
-    <div className={classes.container}>
-      <div className={classes.guestion}>
-        {`5) Напишите какое количество гостей и как часто Вы принимаете?
-        Нужно ли предусмотреть дополнительные спальные места?`}
-      </div>
+    <QuestionCardLayout
+      questionNumber={answer.id}
+      questionText="Напишите какое количество гостей и как часто Вы принимаете?
+      Нужно ли предусмотреть дополнительные спальные места?"
+    >
       <div className={classes.answer}>
-        <MultilineInput label="Ваш ответ" />
+        <MultilineInput
+          label="Ваш ответ"
+          value={answer.answer}
+          onChange={writingText => setAnswer({ ...answer, answer: writingText })}
+        />
       </div>
       <Button onClick={() => onClickNext(answer)} />
-    </div>
+    </QuestionCardLayout>
   );
 };
 
 const styles = {
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    [`@media ${mediaQueries.mobile}`]: {
-      height: 'auto',
-      flex: 1,
-      width: '100%',
-      // paddingLeft: '10px',
-      paddingTop: '30px',
-      // paddingRight: '10px',
-    },
-  },
-  guestion: {
-    color: colors.PRIMARY,
-    fontWeight: 600,
-    paddingBottom: '20px',
-    fontSize: '16px',
-    [`@media ${mediaQueries.mobile}`]: {
-      // fontSize: '14px',
-      // width: '100%',
-      // lineHeight: '10px',
-      // wordSpacing: '3px',
-      paddingLeft: '20px',
-      // paddingTop: '30px',
-      paddingRight: '20px',
-    },
-  },
   answer: {
+    width: '100%',
     marginBottom: '50px',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,
-      // paddingTop: '30px',
-      // paddingRight: '30px',
     },
   },
 };

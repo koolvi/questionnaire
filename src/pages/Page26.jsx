@@ -1,0 +1,109 @@
+import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '../components/Button';
+import mediaQueries from '../mediaQueries';
+import QuestionCardLayout from '../components/QuestionCardLayout/index';
+import CheckboxLabel from '../components/CheckboxLabel';
+import Switch from '../components/Switch';
+
+
+const Page26 = (props) => {
+  const { classes, onClickNext } = props;
+  const [activeSwitch, setSwitch] = useState(false);
+  const [answer, setAnswer] = useState({
+    id: 26,
+    answer: [
+      { id: 0, name: 'Датчики движения', checked: false },
+      { id: 1, name: 'Управление освещением', checked: false },
+      { id: 2, name: 'Климат контроль (управление отоплением и кондиционированием)', checked: false },
+      { id: 3, name: 'Дистанционное управление шторами', checked: false },
+      { id: 4, name: 'Аудио мультирум', checked: false },
+      { id: 5, name: 'Контроль проникновения на объект', checked: false },
+      { id: 6, name: 'Притивопожарная защита', checked: false },
+      { id: 7, name: 'Контроль протечки воды', checked: false },
+      { id: 8, name: 'Контроль утечки газа', checked: false },
+      { id: 9, name: 'Имитация присутствия на объекте', checked: false },
+      { id: 10, name: 'Видео-наблюдение', checked: false },
+      { id: 11, name: 'Экономия электроэнергии', checked: false },
+      { id: 12, name: 'Смарт стекла', checked: false },
+      { id: 13, name: 'Применение робота', checked: false },
+    ],
+    comments: '',
+  });
+
+  const handleChecked = (selectedId) => {
+    const newAnswer = answer.answer.map((item) => {
+      if (item.id === selectedId) return { id: item.id, name: item.name, checked: !item.checked };
+      return item;
+    });
+    setAnswer({ ...answer, answer: newAnswer });
+  };
+
+  const getAnswer = () => {
+    if (activeSwitch) {
+      return onClickNext({ ...answer, answer: 'БЕЗ системы умный дом' });
+    }
+    const selectedItemsArr = answer.answer.filter(item => (item.checked));
+    const answerArr = selectedItemsArr.map(item => item.name);
+    return onClickNext({ ...answer, answer: answerArr });
+  };
+
+  const renderContent = () => {
+    return (
+      <div className={classes.allCheckboxes}>
+        {answer.answer.map(item => (
+          <div className={classes.checkbox} key={item.id}>
+            <CheckboxLabel
+              checked={item.checked}
+              label={item.name}
+              onChange={() => handleChecked(item.id)}
+              disabled={activeSwitch}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <QuestionCardLayout
+      questionNumber={answer.id}
+      questionText="Укажите какие опции системы 'Умный дом' планируются"
+    >
+      <div className={classes.answer}>
+        <div className={classes.containerSwitch}>
+          <Switch
+            label="Система умный дом не планируется"
+            checked={activeSwitch}
+            onChange={() => setSwitch(!activeSwitch)}
+          />
+        </div>
+        {renderContent()}
+      </div>
+      <Button onClick={() => getAnswer()} />
+    </QuestionCardLayout>
+  );
+};
+
+const styles = {
+  answer: {
+    marginBottom: '50px',
+    width: '100%',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '100%',
+      flex: 1,
+    },
+  },
+  allCheckboxes: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  checkbox: {
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '50%',
+    },
+    width: '50%',
+  },
+};
+
+export default withStyles(styles)(Page26);

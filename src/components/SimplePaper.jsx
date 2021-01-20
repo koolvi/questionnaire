@@ -4,10 +4,10 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
   paper: {
-    paddingTop: '30px',
-    paddingRight: '30px',
+    // paddingTop: '30px',
+    // paddingRight: '30px',
     paddingBottom: '30px',
-    paddingLeft: '30px',
+    // paddingLeft: '30px',
   },
 }));
 
