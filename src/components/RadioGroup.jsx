@@ -9,6 +9,7 @@ export default function RadioButtonsGroup(props) {
     value,
     answerVariants,
     onChange,
+    ...rest
   } = props;
 
   const renderAnswerVariants = () => {
@@ -29,6 +30,7 @@ export default function RadioButtonsGroup(props) {
         name="gender1"
         value={value}
         onChange={onChange}
+        {...rest}
       >
         {renderAnswerVariants()}
       </RadioGroup>
