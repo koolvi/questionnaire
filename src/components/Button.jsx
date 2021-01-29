@@ -6,9 +6,11 @@ import ButtonMUI from '@material-ui/core/Button';
 const Button = (props) => {
   const {
     classes,
+    disabled = false,
     variant = 'contained',
     size = 'large',
     text = 'Далее',
+    color = 'primary',
     ...rest
   } = props;
 
@@ -18,8 +20,8 @@ const Button = (props) => {
         variant={variant}
         size={size}
         className={classes.button}
-        color="primary"
-        // disabled={disabled}
+        color={color}
+        disabled={disabled}
         {...rest}
       >
         {text}

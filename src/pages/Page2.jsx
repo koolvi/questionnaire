@@ -13,29 +13,48 @@ const Page2 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 2,
-    address: '',
-    square: '',
-    floor: '',
-    roomsCount: '',
+    question: 'Напишите информацию об объекте',
+    answer: {
+      address: '',
+      square: '',
+      floor: '',
+      roomsCount: '',
+    },
   });
+
+  const getOnlyNumber = (writingText) => {
+    if (Number.isNaN(Number(writingText))) return false;
+    return true;
+  };
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите информацию об объекте"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <TextFieldInput
           label="Адрес объекта"
-          value={answer.address}
-          onChange={writingText => setAnswer({ ...answer, address: writingText })}
+          value={answer.answer.address}
+          onChange={writingText => setAnswer({
+            ...answer,
+            answer: { ...answer.answer, address: writingText },
+          })}
         />
         <div className={classes.containerInputs}>
           <div className={classes.containerSquare}>
             <TextFieldInput
               label="Площадь"
-              value={answer.square}
-              onChange={writingText => setAnswer({ ...answer, square: writingText })}
+              value={answer.answer.square}
+              onChange={(writingText) => {
+                if (getOnlyNumber(writingText)) {
+                  return setAnswer({
+                    ...answer,
+                    answer: { ...answer.answer, square: writingText },
+                  });
+                }
+                return false;
+              }}
               InputProps={{
                 startAdornment: <InputAdornment position="start">Кв.м.</InputAdornment>,
               }}
@@ -45,16 +64,27 @@ const Page2 = (props) => {
           <div className={classes.containerFloor}>
             <TextFieldInput
               label="Этаж"
-              value={answer.floor}
-              onChange={writingText => setAnswer({ ...answer, floor: writingText })}
+              value={answer.answer.floor}
+              onChange={(writingText) => {
+                if (getOnlyNumber(writingText)) {
+                  return setAnswer({
+                    ...answer,
+                    answer: { ...answer.answer, floor: writingText },
+                  });
+                }
+                return false;
+              }}
             />
           </div>
         </div>
 
         <Select
           label="Количество комнат"
-          value={answer.roomsCount}
-          onChange={e => setAnswer({ ...answer, roomsCount: e.target.value })}
+          value={answer.answer.roomsCount}
+          onChange={e => setAnswer({
+            ...answer,
+            answer: { ...answer.answer, roomsCount: e.target.value },
+          })}
         >
           <MenuItem value="Студия">Студия</MenuItem>
           <MenuItem value={1}>1</MenuItem>
@@ -66,7 +96,13 @@ const Page2 = (props) => {
         </Select>
 
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={((answer.answer.address.length === 0)
+          || (answer.answer.square.length === 0)
+          || (answer.answer.floor.length === 0)
+          || (answer.answer.roomsCount.length === 0))}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

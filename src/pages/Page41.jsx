@@ -10,14 +10,15 @@ const Page41 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 41,
+    question: 'Какие тона в отделке предпочитаете?',
     answer: [
-      { id: 0, name: 'теплые', checked: false },
-      { id: 1, name: 'холодные', checked: false },
-      { id: 2, name: 'яркие', checked: false },
-      { id: 3, name: 'спокойные', checked: false },
-      { id: 4, name: 'пастельные', checked: false },
-      { id: 5, name: 'светлые', checked: false },
-      { id: 6, name: 'темные', checked: false },
+      { id: 0, name: 'Теплые', checked: false },
+      { id: 1, name: 'Холодные', checked: false },
+      { id: 2, name: 'Яркие', checked: false },
+      { id: 3, name: 'Спокойные', checked: false },
+      { id: 4, name: 'Пастельные', checked: false },
+      { id: 5, name: 'Светлые', checked: false },
+      { id: 6, name: 'Темные', checked: false },
     ],
     comments: '',
   });
@@ -55,12 +56,22 @@ const Page41 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Какие тона в отделке предпочитаете?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true)
+          || (answer.answer[6].checked === true))}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -75,14 +86,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '400px',
+    gridTemplateRows: 'repeat(7, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 

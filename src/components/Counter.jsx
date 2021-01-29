@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { AddCircle, RemoveCircle } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
+// import mediaQueries from '../mediaQueries';
 
 
 const Counter = (props) => {
@@ -64,6 +65,10 @@ const styles = {
     width: '24px',
     height: '24px',
     marginRight: '8px',
+    // [`@media ${mediaQueries.mobile}`]: {
+    //   width: '50px',
+    //   height: '50px',
+    // },
   },
   value: {
     marginRight: '8px',

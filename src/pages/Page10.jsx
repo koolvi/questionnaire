@@ -6,12 +6,14 @@ import MultilineInput from '../components/MultilineInput';
 import Counter from '../components/Counter';
 import mediaQueries from '../mediaQueries';
 import QuestionCardLayout from '../components/QuestionCardLayout/index';
+// import { Repeat } from '@material-ui/icons';
 
 
 const Page10 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 10,
+    question: 'Отметьте помещения какого назначения и в каком количестве должны быть в квартире/доме?',
     answer: [
       { id: 0, value: 0, name: 'Прихожая' },
       { id: 1, value: 0, name: 'Кабинет' },
@@ -59,12 +61,22 @@ const Page10 = (props) => {
     onClickNext({ ...answer, answer: namesAndValuesArr });
   };
 
+  const checkEmptyAnswer = () => {
+    const arrNoEmptyAnswers = answer.answer.filter((item) => {
+      if (item.value !== 0) return true;
+      return false;
+    });
+
+    if (arrNoEmptyAnswers.length === 0) return true;
+    return false;
+  };
+
   const renderContent = () => {
     return (
       <div className={classes.allVariantsAnswers}>
         {answer.answer.map(item => (
           <div className={classes.variantAnswer} key={item.id}>
-            <Typography variant="caption">
+            <Typography variant="body2">
               {item.name}
             </Typography>
             <Counter
@@ -81,7 +93,7 @@ const Page10 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Отметьте помещения какого назначения и в каком количестве должны быть в квартире/доме?"
+      questionText={answer.question}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -95,7 +107,10 @@ const Page10 = (props) => {
           </div>
         </div>
       </div>
-      <Button onClick={() => getListOfRequiredPremises()} />
+      <Button
+        disabled={checkEmptyAnswer()}
+        onClick={() => getListOfRequiredPremises()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -117,18 +132,28 @@ const styles = {
     flexDirection: 'column',
   },
   allVariantsAnswers: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '250px 250px 200px',
+    gridTemplateRows: 'repeat(8, 30px)',
+    gridColumnGap: '40px',
+    [`@media ${mediaQueries.mobile}`]: {
+      gridTemplateColumns: '300px',
+      gridTemplateRows: 'repeat(22, 40px)',
+      gridColumnGap: '0px',
+    },
+    // display: 'flex',
+    // flexWrap: 'wrap',
   },
   variantAnswer: {
+    // background: 'gray',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '50%',
-    marginBottom: '10px',
-    [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
-    },
+    // width: '50%',
+    // marginBottom: '10px',
+    // [`@media ${mediaQueries.mobile}`]: {
+    //   width: '50%',
+    // },
   },
   comments: {
     width: '100%',

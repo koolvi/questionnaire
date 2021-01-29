@@ -38,17 +38,32 @@ const Page33 = (props) => {
     const newAnswer = answer.variantsAnswers.filter(item => (item.value !== 0));
     // массив, где элемент - это объект вида: {кухня: 2}
     const namesAndValuesArr = newAnswer.map(item => ({ [item.name]: item.value }));
-    global.console.log('namesAndValuesArr=', namesAndValuesArr);
+    // global.console.log('namesAndValuesArr=', namesAndValuesArr);
     const radioAnswerAndVariant = [answer.answer].concat(namesAndValuesArr);
     // массив, где перечеслены все помещения и их кол-во + комментарий
     // const namesAndValuesAndCommentArr = namesAndValuesArr.concat(answer.comments);
-    onClickNext({ id: 33, answer: radioAnswerAndVariant, comments: answer.comments });
+    onClickNext({
+      id: 33,
+      question: 'Какие работы необходимо выполнить с радиаторами?',
+      answer: radioAnswerAndVariant,
+      comments: answer.comments,
+    });
   };
 
   const getAnswer = () => {
     switch (answer.answer) {
-      case 'Никакие': return onClickNext({ id: 33, answer: answer.answer, comments: answer.comments });
-      case 'Демонтаж всех радиаторов': return onClickNext({ id: 33, answer: answer.answer, comments: answer.comments });
+      case 'Никакие': return onClickNext({
+        id: 33,
+        question: 'Какие работы необходимо выполнить с радиаторами?',
+        answer: answer.answer,
+        comments: answer.comments,
+      });
+      case 'Демонтаж всех радиаторов': return onClickNext({
+        id: 33,
+        question: 'Какие работы необходимо выполнить с радиаторами?',
+        answer: answer.answer,
+        comments: answer.comments,
+      });
       case 'Замена всех радиаторов': return getListOfRequiredPremises();
       case 'Демонтаж некоторых и замена некоторых радиаторов': return getListOfRequiredPremises();
       default: return false;
@@ -58,9 +73,10 @@ const Page33 = (props) => {
   const renderVariantsAnswers = () => {
     return (
       <div className={classes.allVariantsAnswers}>
+        <Typography className={classes.quest}>Хотите уточнить?</Typography>
         {answer.variantsAnswers.map(item => (
           <div className={classes.variantAnswer} key={item.id}>
-            <Typography variant="caption">
+            <Typography className={classes.nameBeforecounter}>
               {item.name}
             </Typography>
             <Counter
@@ -112,7 +128,10 @@ const Page33 = (props) => {
         </div>
       </div>
       {/* <Button onClick={() => onClickNext({ id: 33, answer: answer.answer, comments: answer.comments })} /> */}
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -135,16 +154,32 @@ const styles = {
   },
   allVariantsAnswers: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    marginTop: '20px',
+    width: '100%',
+    alignItems: 'center',
+    // flexWrap: 'wrap',
+  },
+  quest: {
+    color: '#3f51b5',
+    marginBottom: '10px',
   },
   variantAnswer: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '60%',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    width: '100%',
+    // width: '60%',
     marginBottom: '10px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '60%',
+      // width: '60%',
+    },
+  },
+  nameBeforecounter: {
+    display: 'flex',
+    flex: 0.8,
+    [`@media ${mediaQueries.mobile}`]: {
+      flex: 1,
     },
   },
   comments: {

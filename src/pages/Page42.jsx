@@ -10,14 +10,15 @@ const Page42 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 42,
+    question: `Предполагается ли использование в интерьере эксклюзивных предметов мебели, роспись стен или потолка, индивидуальная декоративная плитка, библиотека, нестандартная кровать,
+    нестандартные гардеробные, подиумы, витрины для личной коллекции предметов, лепнины, декора, выполненных на заказ по индивидуальному проекту?`,
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Предполагается ли использование в интерьере эксклюзивных предметов мебели, роспись стен или потолка, индивидуальная декоративная плитка, библиотека, нестандартная кровать,
-       нестандартные гардеробные, подиумы, витрины для личной коллекции предметов, лепнины, декора, выполненных на заказ по индивидуальному проекту?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -29,7 +30,10 @@ const Page42 = (props) => {
           ]}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

@@ -10,6 +10,7 @@ const Page23 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 23,
+    question: 'Какие сантехнические приборы планируются в санузлах?',
     answer: [
       { id: 0, name: 'Ванна', checked: false },
       { id: 1, name: 'Унитаз', checked: false },
@@ -23,6 +24,11 @@ const Page23 = (props) => {
     ],
     comments: '',
   });
+
+  const checkForDisabled = () => {
+    const arrTrueItems = answer.answer.filter(item => item.checked === true);
+    return arrTrueItems.length === 0;
+  };
 
   const handleChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -57,12 +63,15 @@ const Page23 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Какие сантехнические приборы планируются в санузлах?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -77,14 +86,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '300px',
+    gridTemplateRows: 'repeat(9, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 

@@ -12,10 +12,11 @@ const Page26 = (props) => {
   const [activeSwitch, setSwitch] = useState(false);
   const [answer, setAnswer] = useState({
     id: 26,
+    question: 'Укажите какие опции системы "Умный дом" планируются',
     answer: [
       { id: 0, name: 'Датчики движения', checked: false },
       { id: 1, name: 'Управление освещением', checked: false },
-      { id: 2, name: 'Климат контроль (управление отоплением и кондиционированием)', checked: false },
+      { id: 2, name: 'Применение робота', checked: false },
       { id: 3, name: 'Дистанционное управление шторами', checked: false },
       { id: 4, name: 'Аудио мультирум', checked: false },
       { id: 5, name: 'Контроль проникновения на объект', checked: false },
@@ -26,10 +27,16 @@ const Page26 = (props) => {
       { id: 10, name: 'Видео-наблюдение', checked: false },
       { id: 11, name: 'Экономия электроэнергии', checked: false },
       { id: 12, name: 'Смарт стекла', checked: false },
-      { id: 13, name: 'Применение робота', checked: false },
+      { id: 13, name: 'Климат контроль (управление отоплением и кондиционированием)', checked: false },
     ],
-    comments: '',
+    // comments: '',
   });
+
+  const checkForDisabled = () => {
+    const arrTrueItems = answer.answer.filter(item => item.checked === true);
+    if ((arrTrueItems.length !== 0) || (activeSwitch === true)) return false;
+    return true;
+  };
 
   const handleChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -68,7 +75,7 @@ const Page26 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Укажите какие опции системы 'Умный дом' планируются"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <div className={classes.containerSwitch}>
@@ -80,7 +87,10 @@ const Page26 = (props) => {
         </div>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -95,14 +105,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '300px 450px',
+    gridTemplateRows: 'repeat(7, 35px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '50%',
+    // width: '50%',
   },
 };
 

@@ -20,6 +20,7 @@ export default function CheckboxLabel(props) {
     checked,
     label,
     disabled = false,
+    isItalicText = false,
     onChange,
   } = props;
   // const [state, setState] = React.useState({
@@ -45,6 +46,10 @@ export default function CheckboxLabel(props) {
         />
       )}
       label={label}
+      style={{
+        'font-style': isItalicText ? 'italic' : 'normal',
+        // 'font-weight': isItalicText ? 'bold' : 'normal',
+      }}
     />
   );
 }

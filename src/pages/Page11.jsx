@@ -10,14 +10,14 @@ const Page11 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 11,
+    question: 'Напишите какое домашнее животное есть/планируется и в каком количестве (кошка, птица, рыбки и др.)? Ответ повлияет на использование антивандальных тканей и размещение места. Если животных нет - пропустите вопрос',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите какое домашнее животное есть/планируется и в каком количестве (кошка, птица, рыбки и др.)?
-       Ответ повлияет на использование антивандальных тканей и размещение места. Если животных нет - пропустите вопрос"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -26,7 +26,10 @@ const Page11 = (props) => {
           onChange={writingText => setAnswer({ ...answer, answer: writingText })}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

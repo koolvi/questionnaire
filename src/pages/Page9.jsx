@@ -11,36 +11,48 @@ const Page9 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 9,
-    answer: '',
-    windowsCount: 0,
+    question: 'Требуется ли замена окон?',
+    answer: {
+      variantAnswer: '',
+      windowsCount: 0,
+    },
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Требуется ли замена окон?"
+      questionText={answer.question}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
           <div className={classes.answerYes}>
             <RadioGroup
-              value={answer.answer}
-              onChange={e => setAnswer({ ...answer, answer: e.target.value })}
+              value={answer.answer.variantAnswer}
+              onChange={e => setAnswer({
+                ...answer,
+                answer: { ...answer.answer, variantAnswer: e.target.value },
+              })}
               answerVariants={[
                 { id: 0, value: 'Да', label: 'Да, в количестве:' },
               ]}
             />
             <Counter
-              value={answer.windowsCount}
+              value={answer.answer.windowsCount}
               textRight="шт."
-              onClick={value => setAnswer({ ...answer, windowsCount: value })}
-              disabled={(answer.answer === 'Нет')}
+              onClick={value => setAnswer({
+                ...answer,
+                answer: { ...answer.answer, windowsCount: value },
+              })}
+              disabled={(answer.answer.variantAnswer === 'Нет')}
             />
           </div>
           <div className={classes.answerNo}>
             <RadioGroup
-              value={answer.answer}
-              onChange={e => setAnswer({ ...answer, answer: e.target.value })}
+              value={answer.answer.variantAnswer}
+              onChange={e => setAnswer({
+                ...answer,
+                answer: { ...answer.answer, variantAnswer: e.target.value },
+              })}
               answerVariants={[
                 { id: 1, value: 'Нет', label: 'Нет' },
               ]}
@@ -48,7 +60,10 @@ const Page9 = (props) => {
           </div>
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.variantAnswer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

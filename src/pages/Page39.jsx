@@ -1,10 +1,5 @@
-
-// на моей мобилке не отображается ДД-ММ-ГГГГ !!!!!!!
-
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
-// import MultilineInput from '../components/MultilineInput';
 import Button from '../components/Button';
 import mediaQueries from '../mediaQueries';
 import QuestionCardLayout from '../components/QuestionCardLayout/index';
@@ -15,27 +10,26 @@ const Page39 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 39,
+    question: 'Когда планируете заехать в новое жилье?',
     answer: null,
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Когда планируете заехать в новое жилье?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <DatePicker
           label="Ориентировочная дата"
           value={answer.answer}
-          handleDate={e => setAnswer(e.target.value)}
+          handleDate={selectedDate => setAnswer({ id: 39, answer: selectedDate })}
         />
-        {/* <MultilineInput
-          label="Ваш ответ"
-          value={answer.answer}
-          onChange={writingText => setAnswer({ ...answer, answer: writingText })}
-        /> */}
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer === null)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };
@@ -49,12 +43,6 @@ const styles = {
       flex: 1,
     },
   },
-  // example: {
-  //   fontSize: '12px',
-  //   color: 'gray',
-  //   fontStyle: 'italic',
-  //   marginTop: '20px',
-  // },
 };
 
 export default withStyles(styles)(Page39);

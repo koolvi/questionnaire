@@ -9,6 +9,7 @@ export default function RadioButtonsGroup(props) {
     value,
     answerVariants,
     onChange,
+    isItalicText = false,
     ...rest
   } = props;
 
@@ -17,6 +18,7 @@ export default function RadioButtonsGroup(props) {
       <FormControlLabel
         key={variant.id}
         value={variant.value}
+        style={{ 'font-style': ((variant.id === 0) && (isItalicText)) ? 'italic' : 'normal' }}
         control={<Radio color="primary" />}
         label={variant.label}
       />
@@ -26,8 +28,6 @@ export default function RadioButtonsGroup(props) {
   return (
     <FormControl component="fieldset">
       <RadioGroup
-        aria-label="gender"
-        name="gender1"
         value={value}
         onChange={onChange}
         {...rest}

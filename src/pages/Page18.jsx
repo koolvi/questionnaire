@@ -25,25 +25,42 @@ const Page18 = (props) => {
   const [wineCooler, setWineCooler] = useState({ text: '' }); // винный холодильник
   const [other, setOther] = useState({ text: '' });
 
+  const checkForDisabled = () => {
+    if (refrigerator.type.length === 0) return true;
+    if (rangeHood.type.length === 0) return true;
+    if ((cookingSurface.type.length === 0) || (cookingSurface.burners === 0)) return true;
+    if (oven.type.length === 0) return true;
+    if (microwave.type.length === 0) return true;
+    if (coffeeMachine.type.length === 0) return true;
+    if (dishwasher.type.length === 0) return true;
+    if (freezer.type.length === 0) return true;
+    if (shredder.text.length === 0) return true;
+    if (wineCooler.text.length === 0) return true;
+    return false;
+  };
 
   const getAnswer = () => {
-    onClickNext({ id: 18, answer: [
-      { "Холодильник:": ` размер: ${(refrigerator.size.length === 0) ? '-' : refrigerator.size}, тип: ${refrigerator.type}, артикул: ${(refrigerator.article.length === 0) ? '-' : refrigerator.article}`},
-      { "Вытяжка:": ` тип: ${rangeHood.type}`},
-      { "Варочная поверхность:": ` тип: ${cookingSurface.type}, кол-во конфорок: ${cookingSurface.burners}`},
-      { "Духовой шкаф:": ` тип: ${oven.type}`},
-      { "СВЧ:": ` тип: ${microwave.type}`},
-      { "Кофемашина:": ` тип: ${coffeeMachine.type}`},
-      { "ПММ:": ` тип: ${dishwasher.type}`},
-      { "Морозилка:": ` тип: ${freezer.type}, высота: ${(freezer.height.length === 0) ? '-' : freezer.height}`},
-      { "Измельчитель в мойке:": ` ${shredder.text}`},
-      { "Винный холодильник:": ` ${wineCooler.text}`},
-      { "Другое:": ` ${other.text}`},
-    ] });
+    onClickNext({
+      id: 18,
+      question: 'Какая техника потребуется в кухне?',
+      answer: [
+        { "Холодильник:": ` размер: ${(refrigerator.size.length === 0) ? '-' : refrigerator.size}, тип: ${refrigerator.type}, артикул: ${(refrigerator.article.length === 0) ? '-' : refrigerator.article}`},
+        { "Вытяжка:": ` тип: ${rangeHood.type}`},
+        { "Варочная поверхность:": ` тип: ${cookingSurface.type}, кол-во конфорок: ${cookingSurface.burners}`},
+        { "Духовой шкаф:": ` тип: ${oven.type}`},
+        { "СВЧ:": ` тип: ${microwave.type}`},
+        { "Кофемашина:": ` тип: ${coffeeMachine.type}`},
+        { "ПММ:": ` тип: ${dishwasher.type}`},
+        { "Морозилка:": ` тип: ${freezer.type}, высота: ${(freezer.height.length === 0) ? '-' : freezer.height}`},
+        { "Измельчитель в мойке:": ` ${shredder.text}`},
+        { "Винный холодильник:": ` ${wineCooler.text}`},
+        { "Другое:": ` ${other.text}`}], 
+    });
   };
 
   return (
     <QuestionCardLayout
+      disableMarginPadding={true}
       questionNumber={18}
       questionText="Какая техника потребуется в кухне?"
     >
@@ -55,16 +72,6 @@ const Page18 = (props) => {
               <p>Холодильник</p>
             </div>
             <div className={classes.conteinerParam}>
-              <div className={classes.param}>
-                <p className={classes.paramName}>Размер</p>
-                <div className={classes.input}>
-                  <TextFieldInput
-                    label="Поле для ввода"
-                    value={refrigerator.size}
-                    onChange={writingText => setRefrigerator({ ...refrigerator, size: writingText })}
-                  />
-                </div>
-              </div>
               <div className={classes.param}>
                 <p className={classes.paramName}>Тип</p>
                 <RadioGroup
@@ -79,10 +86,20 @@ const Page18 = (props) => {
                 />
               </div>
               <div className={classes.param}>
-                <p className={classes.paramName}>Артикул (если имеется)</p>
+                {/* <p className={classes.paramName}>Размер</p> */}
                 <div className={classes.input}>
                   <TextFieldInput
-                    label="Поле для ввода"
+                    label="Размер"
+                    value={refrigerator.size}
+                    onChange={writingText => setRefrigerator({ ...refrigerator, size: writingText })}
+                  />
+                </div>
+              </div>
+              <div className={classes.param}>
+                {/* <p className={classes.paramName}>Артикул (если имеется)</p> */}
+                <div className={classes.input}>
+                  <TextFieldInput
+                    label="Артикул (если имеется)"
                     value={refrigerator.article}
                     onChange={writingText => setRefrigerator({ ...refrigerator, article: writingText })}
                   />
@@ -149,6 +166,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Духовой шкаф</p>
+                </div> */}
                 <p className={classes.paramName}>Тип</p>
                 <RadioGroup
                   row
@@ -169,6 +189,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>СВЧ</p>
+                </div> */}
                 <p className={classes.paramName}>Тип</p>
                 <RadioGroup
                   row
@@ -189,6 +212,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Кофемашина</p>
+                </div> */}
                 <p className={classes.paramName}>Тип</p>
                 <RadioGroup
                   row
@@ -230,6 +256,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Морозильная камера</p>
+                </div> */}
                 <p className={classes.paramName}>Тип</p>
                 <RadioGroup
                   row
@@ -243,10 +272,10 @@ const Page18 = (props) => {
                 />
               </div>
               <div className={classes.param}>
-                <p className={classes.paramName}>Высота</p>
+                {/* <p className={classes.paramName}>Высота</p> */}
                 <div className={classes.input}>
                   <TextFieldInput
-                    label="Поле для ввода"
+                    label="Высота"
                     value={freezer.size}
                     onChange={writingText => setFreezer({ ...refrigerator, height: writingText })}
                   />
@@ -261,6 +290,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Измельчитель в мойке</p>
+                </div> */}
                 <p className={classes.paramName}>Наличие</p>
                 <RadioGroup
                   row
@@ -281,6 +313,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Винный холодильник</p>
+                </div> */}
                 <p className={classes.paramName}>Наличие</p>
                 <RadioGroup
                   row
@@ -301,6 +336,9 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
+                {/* <div className={classes.name}>
+                  <p>Другое</p>
+                </div> */}
                 <div className={classes.input}>
                   <TextFieldInput
                     label="Поле для ввода"
@@ -315,7 +353,10 @@ const Page18 = (props) => {
 
         </div>
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -333,19 +374,32 @@ const styles = {
   },
   answer: {
     display: 'flex',
+    // display: 'grid',
+    // gridTemplateColumns: '500px 500px',
+    // gridTemplateRows: 'repeat(6, 70px)',
+    // gridColumnGap: '40px',
     alignItems: 'flex-start',
     flexDirection: 'column',
   },
   conteinerType: {
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
   },
   name: {
-    color: colors.PRIMARY,
+    // color: colors.PRIMARY,
+    // width: '100%',
+    color: '#979fde',
+    marginTop: '0px',
+    marginBottom: '0px',
+    background: '#dbdfff',
+    paddingLeft: '30px',
+    // fontSize: '12px',
   },
   conteinerParam: {
     display: 'flex',
     flexDirection: 'column',
+    paddingLeft: '30px',
   },
   param: {
     display: 'flex',
@@ -357,6 +411,7 @@ const styles = {
   },
   input: {
     flex: 1,
+    paddingRight: '30px',
   },
 };
 

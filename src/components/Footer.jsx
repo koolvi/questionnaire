@@ -1,12 +1,14 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import mediaQueries from '../mediaQueries';
 
 
 const Footer = (props) => {
   const { classes } = props;
   return (
     <div className={classes.container}>
-      <p className={classes.text}>Ваш дизайнер Катерина Барт</p>
+      <Typography variant="overline" className={classes.text}>Ваш дизайнер - Катерина Барт</Typography>
     </div>
   );
 };
@@ -21,8 +23,16 @@ const styles = {
     marginTop: '40px',
   },
   text: {
-    color: '#CBCBCB',
-    fontStyle: 'italic',
+    color: '#9e9e9e',
+    // fontFamily: 'Courier',
+    textTransform: 'uppercase',
+    letterSpacing: '5px',
+    fontSize: '15px',
+    textShadow: '0px 0px 2px rgba(222, 222, 222, 1)',
+    [`@media ${mediaQueries.mobile}`]: {
+      fontSize: '9px',
+      color: '#CBCBCB',
+    },
   },
 };
 

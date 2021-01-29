@@ -11,13 +11,14 @@ const Page3 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 3,
+    question: 'Напишите состав проживающих членов семьи, указав их возраст',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите состав проживающих членов семьи, указав их возраст"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -35,7 +36,10 @@ const Page3 = (props) => {
           </Typography>
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

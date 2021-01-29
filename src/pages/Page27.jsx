@@ -3,61 +3,39 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import mediaQueries from '../mediaQueries';
 import QuestionCardLayout from '../components/QuestionCardLayout/index';
-import CheckboxLabel from '../components/CheckboxLabel';
+import RadioGroup from '../components/RadioGroup';
 
 
 const Page27 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 27,
-    answer: [
-      { id: 0, name: 'Без камина', checked: false },
-      { id: 1, name: 'Биокамин', checked: false },
-      { id: 2, name: 'Камин с дымоходом', checked: false },
-      { id: 3, name: 'Угловой', checked: false },
-    ],
-    comments: '',
+    question: 'Присутствие в интерьере камина',
+    answer: [],
   });
-
-  const handleChecked = (selectedId) => {
-    const newAnswer = answer.answer.map((item) => {
-      if (item.id === selectedId) return { id: item.id, name: item.name, checked: !item.checked };
-      return item;
-    });
-    setAnswer({ ...answer, answer: newAnswer });
-  };
-
-  const getAnswer = () => {
-    const selectedItemsArr = answer.answer.filter(item => (item.checked));
-    const answerArr = selectedItemsArr.map(item => item.name);
-    onClickNext({ ...answer, answer: answerArr });
-  };
-
-  const renderContent = () => {
-    return (
-      <div className={classes.allCheckboxes}>
-        {answer.answer.map(item => (
-          <div className={classes.checkbox} key={item.id}>
-            <CheckboxLabel
-              checked={item.checked}
-              label={item.name}
-              onChange={() => handleChecked(item.id)}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Присутствие в интерьере камина"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
-        {renderContent()}
+        <RadioGroup
+          isItalicText
+          value={answer.answer}
+          onChange={e => setAnswer({ ...answer, answer: e.target.value })}
+          answerVariants={[
+            { id: 0, value: 'Без камина', label: 'Без камина' },
+            { id: 1, value: 'Биокамин', label: 'Биокамин' },
+            { id: 2, value: 'Угловой', label: 'Угловой' },
+            { id: 3, value: 'Камин с дымоходом', label: 'Камин с дымоходом' },
+          ]}
+        />
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={answer.answer.length === 0}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };
@@ -72,14 +50,15 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '500px',
+    gridTemplateRows: 'repeat(4, 30px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 

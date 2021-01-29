@@ -11,14 +11,14 @@ const Page4 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 4,
+    question: 'Напишите по каждому члену семьи о его хобби, которое необходимо учесть при составлении дизайна Вашего жилья',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите по каждому члену семьи о его хобби,
-      которое необходимо учесть при составлении дизайна Вашего жилья"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -36,7 +36,10 @@ const Page4 = (props) => {
           </Typography>
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

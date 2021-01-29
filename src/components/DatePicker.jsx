@@ -1,33 +1,32 @@
+import 'date-fns';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    width: 200,
-  },
-}));
-
-export default function DatePickers(props) {
-  const classes = useStyles();
-  const { label, value, handleDate } = props;
+export default function MaterialUIPickers(props) {
+  const { value, handleDate } = props;
 
   return (
-    <TextField
-      id="date"
-      label={label}
-      type="date"
-      // defaultValue="2017-05-24"
-      className={classes.textField}
-      InputLabelProps={{
-        shrink: true,
-      }}
-      value={value}
-      onChange={handleDate}
-    />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+        <KeyboardDatePicker
+          minDate={new Date()}
+          disableToolbar
+          variant="inline"
+          format="dd/MM/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          value={value}
+          onChange={handleDate}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
   );
 }

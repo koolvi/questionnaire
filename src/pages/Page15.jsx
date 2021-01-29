@@ -11,13 +11,14 @@ const Page15 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 15,
+    question: 'Выберите орнамент, который стоит использовать в интерьере (который вам нравится), а так же можете написать свой вариант',
     answer: [
-      { id: 0, type: 'полоска', checked: false },
-      { id: 1, type: 'горох', checked: false },
-      { id: 2, type: 'клетка', checked: false },
-      { id: 3, type: 'цветы', checked: false },
-      { id: 4, type: 'вензель', checked: false },
-      { id: 5, type: 'восточные огурцы', checked: false },
+      { id: 0, type: 'Полоска', checked: false },
+      { id: 1, type: 'Горох', checked: false },
+      { id: 2, type: 'Клетка', checked: false },
+      { id: 3, type: 'Цветы', checked: false },
+      { id: 4, type: 'Вензель', checked: false },
+      { id: 5, type: 'Восточные огурцы', checked: false },
     ],
     comments: '',
   });
@@ -59,7 +60,7 @@ const Page15 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Выберите орнамент, который стоит использовать в интерьере (который вам нравится), а так же можете написать свой вариант"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
@@ -71,7 +72,16 @@ const Page15 = (props) => {
           />
         </div>
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true))}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -86,17 +96,20 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '300px',
+    gridTemplateRows: 'repeat(6, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
   comments: {
-    width: '100%',
+    // width: '100%',
   },
 };
 

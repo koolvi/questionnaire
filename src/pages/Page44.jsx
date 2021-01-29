@@ -11,6 +11,7 @@ const Page44 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 44,
+    question: 'Есть ли приоритеты в выборе фирм-поставщиков товаров и услуг - с точным указанием контактов? (техника, мебель, кухни, свет, сантехника, текстиль, обои и тд)',
     answer: '',
     comments: '',
   });
@@ -18,7 +19,7 @@ const Page44 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Есть ли приоритеты в выборе фирм-поставщиков товаров и услуг - с точным указанием контактов? (техника, мебель, кухни, свет, сантехника, текстиль, обои и тд)"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -38,7 +39,10 @@ const Page44 = (props) => {
           />
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

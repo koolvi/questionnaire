@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextFieldInput from '../components/TextFieldInput';
-// import PhoneNumberInput from '../components/PhoneNumberInput';
 import Button from '../components/Button';
 import QuestionCardLayout from '../components/QuestionCardLayout/index';
 import mediaQueries from '../mediaQueries';
@@ -10,35 +9,58 @@ const Page1 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 1,
-    name: '',
-    email: '',
-    phone: '',
+    question: 'Тут написан какой-то приветствующий текст, который предлагает пройти тест из 40+ вопросов',
+    answer: {
+      name: '',
+      email: '',
+      phone: '',
+    },
   });
+
+  const getOnlyNumber = (writingText) => {
+    if (Number.isNaN(Number(writingText))) return;
+    setAnswer({
+      ...answer,
+      answer: { ...answer.answer, phone: writingText },
+    });
+  };
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Тут написан какой-то приветствующий текст, который предлагает пройти тест из 40+ вопросов"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <TextFieldInput
           label="ФИО"
-          value={answer.name}
-          onChange={writingText => setAnswer({ ...answer, name: writingText })}
+          value={answer.answer.name}
+          onChange={writingText => setAnswer({
+            ...answer,
+            answer: { ...answer.answer, name: writingText },
+          })}
         />
         <TextFieldInput
           label="Email"
-          value={answer.email}
-          onChange={writingText => setAnswer({ ...answer, email: writingText })}
+          value={answer.answer.email}
+          onChange={writingText => setAnswer({
+            ...answer,
+            answer: { ...answer.answer, email: writingText },
+          })}
         />
-        {/* <PhoneNumberInput /> */}
         <TextFieldInput
           label="Контактный телефон"
-          value={answer.phone}
-          onChange={writingText => setAnswer({ ...answer, phone: writingText })}
+          helperText="Например: 9210001122"
+          value={answer.answer.phone}
+          onChange={writingText => getOnlyNumber(writingText)}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(
+          (answer.answer.name.length === 0)
+          || (answer.answer.email.length === 0)
+          || (answer.answer.phone.length === 0))}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

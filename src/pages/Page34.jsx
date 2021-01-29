@@ -10,13 +10,14 @@ const Page34 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 34,
+    question: 'Требуется ли шумоизоляция и звукоизоляция?',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Требуется ли шумоизоляция и звукоизоляция?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -28,7 +29,10 @@ const Page34 = (props) => {
           ]}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

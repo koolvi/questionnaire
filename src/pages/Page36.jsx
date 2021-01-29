@@ -11,6 +11,7 @@ const Page36 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 36,
+    question: 'Есть ли аллергия у проживающих? (на шерсть, на определенные материалы, на химию и другое)',
     answer: '',
     comments: '',
   });
@@ -18,7 +19,7 @@ const Page36 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Есть ли аллергия у проживающих? (на шерсть, на определенные материалы, на химию и другое)"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -38,7 +39,10 @@ const Page36 = (props) => {
           />
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

@@ -1,6 +1,3 @@
-
-// в начале документа поставить дату !!!!!!!!
-
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MultilineInput from '../components/MultilineInput';
@@ -13,14 +10,15 @@ const Page47 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 47,
+    question: `Для отправки Ваших ответов нажмите кнопку "Завершить тест". Если у Вас
+    имеются комментарии или вопросы напишите их в форме ниже, а затем нажмите кнопку`,
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Для отправки Ваших ответов нажмите кнопку 'Завершить тест'. Если у Вас
-       имеются комментарии или вопросы напишите их в форме ниже, а затем нажмите кнопку"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -29,7 +27,10 @@ const Page47 = (props) => {
           onChange={writingText => setAnswer({ ...answer, answer: writingText })}
         />
       </div>
-      <Button text="Завершить тест" onClick={() => onClickNext(answer)} />
+      <Button
+        text="Завершить тест"
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

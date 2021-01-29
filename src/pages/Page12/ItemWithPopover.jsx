@@ -7,7 +7,12 @@ import CheckboxLabel from '../../components/CheckboxLabel';
 
 
 const ItemWithPopover = (props) => {
-  const { classes, item, handleNameChecked } = props;
+  const {
+    classes,
+    item,
+    handleNameChecked,
+    disabledCheckbox,
+  } = props;
 
   // ///////////// часть для popover
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,6 +34,7 @@ const ItemWithPopover = (props) => {
       onMouseLeave={handlePopoverClose}
     >
       <CheckboxLabel
+        disabled={(item.checked === true) ? false : disabledCheckbox}
         checked={item.checked}
         label={item.name}
         onChange={() => handleNameChecked(item.id)}

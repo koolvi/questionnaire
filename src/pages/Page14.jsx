@@ -10,6 +10,7 @@ const Page14 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 14,
+    question: 'Выберите цвета, которые не стоит использовать в интерьере (цвета, которые не нравятся)',
     answer: [
       { id: 0, color: 'белый', checked: false },
       { id: 1, color: 'желтый', checked: false },
@@ -66,12 +67,34 @@ const Page14 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Выберите цвета, которые не стоит использовать в интерьере (цвета, которые не нравятся)"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getColorsOnlyTrue()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true)
+          || (answer.answer[6].checked === true)
+          || (answer.answer[7].checked === true)
+          || (answer.answer[8].checked === true)
+          || (answer.answer[9].checked === true)
+          || (answer.answer[10].checked === true)
+          || (answer.answer[11].checked === true)
+          || (answer.answer[12].checked === true)
+          || (answer.answer[13].checked === true)
+          || (answer.answer[14].checked === true)
+          || (answer.answer[15].checked === true)
+          || (answer.answer[16].checked === true)
+          || (answer.answer[17].checked === true)
+          || (answer.answer[18].checked === true))}
+        onClick={() => getColorsOnlyTrue()}
+      />
     </QuestionCardLayout>
   );
 };

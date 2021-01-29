@@ -10,6 +10,7 @@ const Page37 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 37,
+    question: 'Ожидаемый эффект от нового интерьера?',
     answer: [
       { id: 0, name: 'Повышение уровня жизни', checked: false },
       { id: 1, name: 'Отражение статуса', checked: false },
@@ -57,12 +58,24 @@ const Page37 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Ожидаемый эффект от нового интерьера?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true)
+          || (answer.answer[6].checked === true)
+          || (answer.answer[7].checked === true)
+          || (answer.answer[8].checked === true))}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -77,14 +90,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '700px',
+    gridTemplateRows: 'repeat(9, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 

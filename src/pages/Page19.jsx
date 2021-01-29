@@ -112,7 +112,25 @@ const Page19 = (props) => {
 
         </div>
       </div>
-      <Button onClick={() => onClickNext({ id: 19, answer: answer })} />
+      <Button
+        disabled={(
+          (answer.field0.answ.length === 0)
+          || (answer.field1.answ.length === 0)
+          || (answer.field2.answ.length === 0)
+          || (answer.field3.answ.length === 0)
+        )}
+        onClick={() => onClickNext({
+          id: 19,
+          question: 'Расположение кухни',
+          answer: [
+            { [answer.field0.quest]: answer.field0.answ },
+            { [answer.field1.quest]: answer.field1.answ },
+            { [answer.field2.quest]: answer.field2.answ },
+            { [answer.field3.quest]: answer.field3.answ },
+            { [answer.field4.quest]: answer.field4.answ },
+          ],
+        })}
+      />
     </QuestionCardLayout>
   );
 };

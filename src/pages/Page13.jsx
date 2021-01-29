@@ -14,6 +14,7 @@ const Page13 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 13,
+    question: 'Цветовое предпочтение в интерьере у членов семьи?',
     answer: [
       {
         id: 0,
@@ -108,6 +109,12 @@ const Page13 = (props) => {
     );
   };
 
+  const checkForDisabled = () => {
+    if (answer.answer.length === 0) return true;
+    if (answer.answer[0].color.length === 0) return true;
+    return false;
+  };
+
   const addNewPeople = () => {
     const newAnswer = answer.answer.concat({
       id: counter,
@@ -121,10 +128,10 @@ const Page13 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Цветовое предпочтение в интерьере у членов семьи?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
-        {renderContent()}
+        {(answer.answer.length !== 0) ? renderContent() : null}
 
         <div className={classes.buttonAddPeople}>
           <Button
@@ -144,7 +151,10 @@ const Page13 = (props) => {
         </div>
 
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };

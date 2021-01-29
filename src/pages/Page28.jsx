@@ -13,13 +13,14 @@ const Page28 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 28,
+    question: 'Напишите какие имеющиеся у Вас предметы хотели бы учесть в интерьере?',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите какие имеющиеся у Вас предметы хотели бы учесть в интерьере?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput

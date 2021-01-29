@@ -8,7 +8,7 @@ import mediaQueries from '../../mediaQueries';
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    marginBottom: '30px',
+    // marginBottom: '30px',
     [`@media ${mediaQueries.mobile}`]: {
       flexGrow: 0,
     },

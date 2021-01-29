@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   paper: {
     // paddingTop: '30px',
     // paddingRight: '30px',
-    paddingBottom: '30px',
+    // paddingBottom: '30px',
     // paddingLeft: '30px',
   },
 }));

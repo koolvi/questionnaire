@@ -31,6 +31,8 @@ class TextFieldInput extends React.Component {
       classes,
       label,
       onChange,
+      placeholder = false,
+      helperText = false,
       ...rest
     } = this.props;
 
@@ -39,7 +41,8 @@ class TextFieldInput extends React.Component {
         <TextField
           id="outlined-textarea"
           label={label}
-          // placeholder="Введите текст..."
+          placeholder={placeholder}
+          helperText={helperText}
           // multiline
           className={classes.textField}
           // style={{ width: (size === 'small' ? '180px' : '400px') }}

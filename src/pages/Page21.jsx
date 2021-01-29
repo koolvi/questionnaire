@@ -10,6 +10,7 @@ const Page21 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 21,
+    question: 'В каких помещениях планируется домашний кинотеатр?',
     answer: [
       { id: 0, name: 'Ни в каких', checked: false },
       { id: 1, name: 'Кухня', checked: false },
@@ -26,6 +27,12 @@ const Page21 = (props) => {
     ],
     comments: '',
   });
+  const [isDisabledAnswers, setDisabledAnswers] = useState(false);
+
+  const checkForDisabled = () => {
+    const arrTrueItems = answer.answer.filter(item => item.checked === true);
+    return arrTrueItems.length === 0;
+  };
 
   const handleChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -41,6 +48,19 @@ const Page21 = (props) => {
     onClickNext({ ...answer, answer: answerArr });
   };
 
+  const handleCheckedFirstCheckbox = () => {
+    // будущее значение чек первого элемента
+    const futureFirstElementChecked = !answer.answer[0].checked;
+    // новый массив - первый чекбокс с новым значением, сброс галочек у остальных чекбоксов
+    const newAnswer = answer.answer.map((item) => {
+      if (item.id === 0) return { ...item, checked: !item.checked };
+      return futureFirstElementChecked ? { ...item, checked: false } : item;
+    });
+    // установить новый стейт
+    setAnswer({ ...answer, answer: newAnswer });
+    setDisabledAnswers(futureFirstElementChecked);
+  };
+
   const renderContent = () => {
     return (
       <div className={classes.allCheckboxes}>
@@ -49,7 +69,13 @@ const Page21 = (props) => {
             <CheckboxLabel
               checked={item.checked}
               label={item.name}
-              onChange={() => handleChecked(item.id)}
+              onChange={() => {
+                return (item.id === 0)
+                  ? handleCheckedFirstCheckbox()
+                  : handleChecked(item.id);
+              }}
+              isItalicText={item.id === 0}
+              disabled={(item.id === 0) ? false : isDisabledAnswers}
             />
           </div>
         ))}
@@ -60,12 +86,15 @@ const Page21 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="В каких помещениях планируется домашний кинотеатр?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };

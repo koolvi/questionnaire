@@ -31,6 +31,7 @@ const Page12 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 12,
+    question: 'Отметьте какой стиль интерьера Вам нравится? (максимум можно отметить 3 варианта)',
     answer: [
       {
         id: 0,
@@ -165,11 +166,21 @@ const Page12 = (props) => {
     onClickNext({ ...answer, answer: names });
   };
 
+  // функция считает кол-во галок, если их 3, то вернет фолс, чтобы заблочить пустые чекбоксы
+  const canSelectStyle = () => {
+    const summaTrueCheck = answer.answer.reduce((sum, item) => {
+      if (item.checked) return sum + 1;
+      return sum;
+    }, 0);
+    return (summaTrueCheck === 3);
+  };
+
   const renderContent = () => {
     return (
       <div className={classes.allListItems}>
         {answer.answer.map(item => (
           <ItemWithPopover
+            disabledCheckbox={canSelectStyle()}
             item={item}
             handleNameChecked={handleNameChecked}
           />
@@ -181,7 +192,7 @@ const Page12 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Отметьте какой стиль интерьера Вам нравится? (максимум можно отметить 3 варианта)"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
@@ -193,7 +204,22 @@ const Page12 = (props) => {
           />
         </div>
       </div>
-      <Button onClick={() => getNamesOnlyTrue()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true)
+          || (answer.answer[6].checked === true)
+          || (answer.answer[7].checked === true)
+          || (answer.answer[8].checked === true)
+          || (answer.answer[9].checked === true)
+          || (answer.answer[10].checked === true)
+          || (answer.answer[11].checked === true))}
+        onClick={() => getNamesOnlyTrue()}
+      />
     </QuestionCardLayout>
   );
 };

@@ -10,6 +10,7 @@ const Page30 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 30,
+    question: 'Предпочтительное использование напольных материалов?',
     answer: [
       { id: 0, name: 'Наливной пол', checked: false },
       { id: 1, name: 'Керамическая плитка', checked: false },
@@ -60,12 +61,27 @@ const Page30 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Предпочтительное использование напольных материалов?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true)
+          || (answer.answer[4].checked === true)
+          || (answer.answer[5].checked === true)
+          || (answer.answer[6].checked === true)
+          || (answer.answer[7].checked === true)
+          || (answer.answer[8].checked === true)
+          || (answer.answer[9].checked === true)
+          || (answer.answer[10].checked === true)
+          || (answer.answer[11].checked === true))}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };

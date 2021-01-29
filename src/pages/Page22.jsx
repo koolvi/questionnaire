@@ -12,6 +12,7 @@ const Page22 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 22,
+    question: 'Укажите сколько телевизоров Вы бы хотели разместить в следующих помещениях',
     answer: [
       { id: 0, value: 0, name: 'Холл' },
       { id: 1, value: 0, name: 'Кухня' },
@@ -70,7 +71,7 @@ const Page22 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Укажите сколько телевизоров Вы бы хотели разместить в следующих помещениях"
+      questionText={answer.question}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>

@@ -12,6 +12,7 @@ const Page25 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 25,
+    question: 'Укажите сколько кондиционеров Вы бы хотели разместить в следующих помещениях?',
     answer: [
       { id: 0, value: 0, name: 'Холл' },
       { id: 1, value: 0, name: 'Кухня' },
@@ -55,7 +56,7 @@ const Page25 = (props) => {
       <div className={classes.allVariantsAnswers}>
         {answer.answer.map(item => (
           <div className={classes.variantAnswer} key={item.id}>
-            <Typography variant="caption">
+            <Typography variant="body2">
               {item.name}
             </Typography>
             <Counter
@@ -72,7 +73,7 @@ const Page25 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Укажите сколько кондиционеров Вы бы хотели разместить в следующих помещениях?"
+      questionText={answer.question}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -108,17 +109,21 @@ const styles = {
     flexDirection: 'column',
   },
   allVariantsAnswers: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '200px 200px 200px',
+    gridTemplateRows: 'repeat(5, 35px)',
+    gridColumnGap: '50px',
   },
   variantAnswer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '50%',
-    marginBottom: '10px',
+    // width: '50%',
+    // marginBottom: '10px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
   },
   comments: {

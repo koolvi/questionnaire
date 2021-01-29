@@ -10,13 +10,14 @@ const Page46 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 46,
+    question: 'Есть ли у вас надежная строительная бригада, умеющая читать чертежи и выполнять сложные строительные работы, опыт работы с дорогостоящими материалами (черновые работы, инженер электрик, инженер сантехник, инженер по отопление и водоснабжению, инженер по вентиляции и кондиционированию, чистовые работы)?',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Есть ли у вас надежная строительная бригада, умеющая читать чертежи и выполнять сложные строительные работы, опыт работы с дорогостоящими материалами (черновые работы, инженер электрик, инженер сантехник, инженер по отопление и водоснабжению, инженер по вентиляции и кондиционированию, чистовые работы)?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -28,7 +29,10 @@ const Page46 = (props) => {
           ]}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

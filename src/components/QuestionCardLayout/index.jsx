@@ -9,15 +9,24 @@ const QuestionCardLayout = (props) => {
     classes,
     questionNumber,
     questionText,
+    disableMarginPadding = false,
     children,
   } = props;
 
   return (
     <div className={classes.container}>
       <QuestionNumber questionNumber={questionNumber} />
-      <div className={classes.contentContainer}>
-        <QuestionText text={questionText} />
-        {children}
+      <div
+        className={classes.contentContainer}
+        style={{
+          paddingRight: disableMarginPadding ? '0px' : '30px',
+          paddingLeft: disableMarginPadding ? '0px' : '30px',
+        }}
+      >
+        <div className={classes.obertka}>
+          <QuestionText disableMarginPaddingIn18Page={disableMarginPadding} text={questionText} />
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -34,18 +43,24 @@ const styles = {
     },
   },
   contentContainer: {
+    maxHeight: '500px',
+    overflowY: 'auto',
     // height: '100%',
     display: 'flex',
     flexDirection: 'column',
     // alignItems: 'center',
-    paddingRight: '30px',
-    paddingLeft: '30px',
+    // paddingRight: '30px',
+    // paddingLeft: '30px',
     [`@media ${mediaQueries.mobile}`]: {
       height: 'auto',
       flex: 1,
       width: '100%',
       boxSizing: 'border-box',
     },
+  },
+  obertka: {
+    paddingBottom: '30px',
+    paddingTop: '30px',
   },
 };
 

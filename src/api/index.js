@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', '..', 'build')));
 app.use(express.static('public'));
 
-app.get('/api/complete', async (req, res) => {
+app.post('/api/complete', async (req, res) => {
   global.console.log(req.body);
 
   // const mailOptions = {

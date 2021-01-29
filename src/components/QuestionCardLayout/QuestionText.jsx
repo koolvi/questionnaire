@@ -4,10 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import mediaQueries from '../../mediaQueries';
 
 const QuestionText = (props) => {
-  const { classes, text } = props;
+  const { classes, text, disableMarginPaddingIn18Page = false } = props;
 
   return (
-    <div className={classes.guestion}>
+    <div className={classes.guestion} style={{ paddingLeft: disableMarginPaddingIn18Page ? '30px' : '0px' }}>
       <Typography>
         {text}
       </Typography>

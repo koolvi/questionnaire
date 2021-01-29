@@ -10,14 +10,14 @@ const Page5 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 5,
+    question: 'Напишите какое количество гостей и как часто Вы принимаете? Нужно ли предусмотреть дополнительные спальные места?',
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Напишите какое количество гостей и как часто Вы принимаете?
-      Нужно ли предусмотреть дополнительные спальные места?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -26,7 +26,10 @@ const Page5 = (props) => {
           onChange={writingText => setAnswer({ ...answer, answer: writingText })}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

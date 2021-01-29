@@ -10,15 +10,16 @@ const Page32 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 32,
+    question: `Необходимость отдельного размещения различных групп предметов: (фонотека, библиотека, детские игрушки,
+      спортивный инвентарь, предметы быта - гладильная доска, комбаин) - встроенные шкафы, стеллажи,
+       гардеробные (открытые/закрытые), нужна ли кладовка`,
     answer: '',
   });
 
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Необходимость отдельного размещения различных групп предметов: (фонотека, библиотека, детские игрушки,
-         спортивный инвентарь, предметы быта - гладильная доска, комбаин) - встроенные шкафы, стеллажи,
-          гардеробные (открытые\закрытые), нужна ли кладовка"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -27,7 +28,10 @@ const Page32 = (props) => {
           onChange={writingText => setAnswer({ ...answer, answer: writingText })}
         />
       </div>
-      <Button onClick={() => onClickNext(answer)} />
+      <Button
+        disabled={(answer.answer.length === 0)}
+        onClick={() => onClickNext(answer)}
+      />
     </QuestionCardLayout>
   );
 };

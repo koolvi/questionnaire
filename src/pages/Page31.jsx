@@ -10,28 +10,34 @@ const Page31 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 31,
+    question: 'Где необходимо сделать теплые полы?',
     answer: [
       { id: 0, name: 'Нигде', checked: false },
       { id: 1, name: 'Столовая', checked: false },
       { id: 2, name: 'Кухня', checked: false },
-      { id: 3, name: 'Везде', checked: false },
-      { id: 4, name: 'Гостиная', checked: false },
-      { id: 5, name: 'Гостевая', checked: false },
-      { id: 6, name: 'Спальня', checked: false },
-      { id: 7, name: 'Детская', checked: false },
-      { id: 8, name: 'Игровая', checked: false },
-      { id: 9, name: 'Кабинет', checked: false },
-      { id: 10, name: 'Туалет', checked: false },
-      { id: 11, name: 'Ванная комната', checked: false },
-      { id: 12, name: 'Гардеробная', checked: false },
-      { id: 13, name: 'Кладовая', checked: false },
-      { id: 14, name: 'Серверная', checked: false },
-      { id: 15, name: 'Терраса', checked: false },
-      { id: 16, name: 'Балкон', checked: false },
-      { id: 17, name: 'Холл', checked: false },
+      { id: 3, name: 'Гостиная', checked: false },
+      { id: 4, name: 'Гостевая', checked: false },
+      { id: 5, name: 'Спальня', checked: false },
+      { id: 6, name: 'Детская', checked: false },
+      { id: 7, name: 'Игровая', checked: false },
+      { id: 8, name: 'Кабинет', checked: false },
+      { id: 9, name: 'Туалет', checked: false },
+      { id: 10, name: 'Ванная комната', checked: false },
+      { id: 11, name: 'Гардеробная', checked: false },
+      { id: 12, name: 'Кладовая', checked: false },
+      { id: 13, name: 'Серверная', checked: false },
+      { id: 14, name: 'Терраса', checked: false },
+      { id: 15, name: 'Балкон', checked: false },
+      { id: 16, name: 'Холл', checked: false },
     ],
-    comments: '',
+    // comments: '',
   });
+  const [isDisabledAnswers, setDisabledAnswers] = useState(false);
+
+  const checkForDisabled = () => {
+    const arrTrueItems = answer.answer.filter(item => item.checked === true);
+    return arrTrueItems.length === 0;
+  };
 
   const handleChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -47,6 +53,19 @@ const Page31 = (props) => {
     onClickNext({ ...answer, answer: answerArr });
   };
 
+  const handleCheckedFirstCheckbox = () => {
+    // будущее значение чек первого элемента
+    const futureFirstElementChecked = !answer.answer[0].checked;
+    // новый массив - первый чекбокс с новым значением, сброс галочек у остальных чекбоксов
+    const newAnswer = answer.answer.map((item) => {
+      if (item.id === 0) return { ...item, checked: !item.checked };
+      return futureFirstElementChecked ? { ...item, checked: false } : item;
+    });
+    // установить новый стейт
+    setAnswer({ ...answer, answer: newAnswer });
+    setDisabledAnswers(futureFirstElementChecked);
+  };
+
   const renderContent = () => {
     return (
       <div className={classes.allCheckboxes}>
@@ -55,7 +74,13 @@ const Page31 = (props) => {
             <CheckboxLabel
               checked={item.checked}
               label={item.name}
-              onChange={() => handleChecked(item.id)}
+              onChange={() => {
+                return (item.id === 0)
+                  ? handleCheckedFirstCheckbox()
+                  : handleChecked(item.id);
+              }}
+              isItalicText={item.id === 0}
+              disabled={(item.id === 0) ? false : isDisabledAnswers}
             />
           </div>
         ))}
@@ -66,12 +91,15 @@ const Page31 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Где необходимо сделать теплые полы?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };

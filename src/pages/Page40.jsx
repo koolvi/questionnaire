@@ -10,6 +10,7 @@ const Page40 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 40,
+    question: 'Какое освещение предпочитаете?',
     answer: [
       { id: 0, name: 'Холодный свет', checked: false },
       { id: 1, name: 'Теплый свет', checked: false },
@@ -52,12 +53,19 @@ const Page40 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Какое освещение предпочитаете?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={!(
+          (answer.answer[0].checked === true)
+          || (answer.answer[1].checked === true)
+          || (answer.answer[2].checked === true)
+          || (answer.answer[3].checked === true))}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -72,14 +80,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '400px',
+    gridTemplateRows: 'repeat(4, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 

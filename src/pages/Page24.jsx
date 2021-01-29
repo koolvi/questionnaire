@@ -10,15 +10,22 @@ const Page24 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 24,
+    question: 'Если планируется отдельная постирочная, то что в ней необходимо?',
     answer: [
-      { id: 0, name: 'не планируется', checked: false },
-      { id: 1, name: 'сушильная машина', checked: false },
-      { id: 2, name: 'стиральная машина', checked: false },
-      { id: 3, name: 'шкаф под химию', checked: false },
-      { id: 4, name: 'шкаф под белье', checked: false },
+      { id: 0, name: 'Не планируется', checked: false },
+      { id: 1, name: 'Сушильная машина', checked: false },
+      { id: 2, name: 'Стиральная машина', checked: false },
+      { id: 3, name: 'Шкаф под химию', checked: false },
+      { id: 4, name: 'Шкаф под белье', checked: false },
     ],
-    comments: '',
+    // comments: '',
   });
+  const [isDisabledAnswers, setDisabledAnswers] = useState(false);
+
+  const checkForDisabled = () => {
+    const arrTrueItems = answer.answer.filter(item => item.checked === true);
+    return arrTrueItems.length === 0;
+  };
 
   const handleChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -34,6 +41,19 @@ const Page24 = (props) => {
     onClickNext({ ...answer, answer: answerArr });
   };
 
+  const handleCheckedFirstCheckbox = () => {
+    // будущее значение чек первого элемента
+    const futureFirstElementChecked = !answer.answer[0].checked;
+    // новый массив - первый чекбокс с новым значением, сброс галочек у остальных чекбоксов
+    const newAnswer = answer.answer.map((item) => {
+      if (item.id === 0) return { ...item, checked: !item.checked };
+      return futureFirstElementChecked ? { ...item, checked: false } : item;
+    });
+    // установить новый стейт
+    setAnswer({ ...answer, answer: newAnswer });
+    setDisabledAnswers(futureFirstElementChecked);
+  };
+
   const renderContent = () => {
     return (
       <div className={classes.allCheckboxes}>
@@ -42,7 +62,13 @@ const Page24 = (props) => {
             <CheckboxLabel
               checked={item.checked}
               label={item.name}
-              onChange={() => handleChecked(item.id)}
+              onChange={() => {
+                return (item.id === 0)
+                  ? handleCheckedFirstCheckbox()
+                  : handleChecked(item.id);
+              }}
+              isItalicText={item.id === 0}
+              disabled={(item.id === 0) ? false : isDisabledAnswers}
             />
           </div>
         ))}
@@ -53,12 +79,15 @@ const Page24 = (props) => {
   return (
     <QuestionCardLayout
       questionNumber={answer.id}
-      questionText="Если планируется отдельная постирочная, то что в ней необходимо?"
+      questionText={answer.question}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button onClick={() => getAnswer()} />
+      <Button
+        disabled={checkForDisabled()}
+        onClick={() => getAnswer()}
+      />
     </QuestionCardLayout>
   );
 };
@@ -73,14 +102,17 @@ const styles = {
     },
   },
   allCheckboxes: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '300px',
+    gridTemplateRows: 'repeat(5, 33px)',
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      // width: '50%',
     },
-    width: '33%',
+    // width: '33%',
   },
 };
 
