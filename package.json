@@ -27,8 +27,9 @@
   "scripts": {
     "start": "react-scripts start",
     "front:build": "react-scripts build",
-    "api:dev": "yarn babel-node src/api/index.js",
-    "api:build": "yarn babel src/api -d api-build"
+    "api:dev": "yarn babel-node src/api/index.jsx",
+    "api:build": "yarn babel src/api -d api-build",
+    "api:prod": "rm -r api-build && yarn api:build && node api-build/index.js"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

@@ -10,7 +10,7 @@ const port = 4000;
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '..', '..', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'build')));
 app.use(express.static('public'));
 
 app.post('/api/complete', async (req, res) => {

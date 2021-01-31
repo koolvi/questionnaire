@@ -9,7 +9,7 @@ const AnswersPage = require('./AnswersPage');
 
 const buildAnswersHTML = (answersData) => {
   const html = ReactDOMServer.renderToStaticMarkup(
-    <AnswersPage answersData={answersData} />
+    <AnswersPage answersData={answersData} />,
   );
 
   const htmlWDoc = `<!DOCTYPE html>${html}`;
