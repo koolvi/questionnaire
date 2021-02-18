@@ -6,7 +6,7 @@ const sendMail = require('./sendMail');
 const buildHTML = require('./buildHTML');
 
 const app = express();
-const port = 4000;
+const port = 80;
 
 app.use(bodyParser.json());
 
