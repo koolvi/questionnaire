@@ -23,7 +23,7 @@ const Page39 = (props) => {
         <DatePicker
           label="Ориентировочная дата"
           value={answer.answer}
-          handleDate={selectedDate => setAnswer({ id: 39, answer: selectedDate })}
+          handleDate={selectedDate => setAnswer({ ...answer, answer: selectedDate })}
         />
       </div>
       <Button

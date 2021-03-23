@@ -44,17 +44,17 @@ const Page18 = (props) => {
       id: 18,
       question: 'Какая техника потребуется в кухне?',
       answer: [
-        { "Холодильник:": ` размер: ${(refrigerator.size.length === 0) ? '-' : refrigerator.size}, тип: ${refrigerator.type}, артикул: ${(refrigerator.article.length === 0) ? '-' : refrigerator.article}`},
-        { "Вытяжка:": ` тип: ${rangeHood.type}`},
-        { "Варочная поверхность:": ` тип: ${cookingSurface.type}, кол-во конфорок: ${cookingSurface.burners}`},
-        { "Духовой шкаф:": ` тип: ${oven.type}`},
-        { "СВЧ:": ` тип: ${microwave.type}`},
-        { "Кофемашина:": ` тип: ${coffeeMachine.type}`},
-        { "ПММ:": ` тип: ${dishwasher.type}`},
-        { "Морозилка:": ` тип: ${freezer.type}, высота: ${(freezer.height.length === 0) ? '-' : freezer.height}`},
-        { "Измельчитель в мойке:": ` ${shredder.text}`},
-        { "Винный холодильник:": ` ${wineCooler.text}`},
-        { "Другое:": ` ${other.text}`}], 
+        { "Холодильник": `${refrigerator.type}, размер: ${(refrigerator.size.length === 0) ? '-' : refrigerator.size}, артикул: ${(refrigerator.article.length === 0) ? '-' : refrigerator.article}`},
+        { "Вытяжка": rangeHood.type},
+        { "Варочная поверхность": `${cookingSurface.type}, кол-во конфорок: ${cookingSurface.burners}`},
+        { "Духовой шкаф": oven.type},
+        { "СВЧ": microwave.type},
+        { "Кофемашина": coffeeMachine.type},
+        { "ПММ": dishwasher.type},
+        { "Морозильная камера": `${freezer.type}, высота: ${(freezer.height.length === 0) ? '-' : freezer.height}`},
+        { "Измельчитель в мойке": `${shredder.text}`},
+        { "Винный холодильник": `${wineCooler.text}`},
+        { "Другое": `${other.text}`}], 
     });
   };
 

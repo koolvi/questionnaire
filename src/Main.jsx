@@ -135,6 +135,7 @@ const Main = (props) => {
 
       handleClickOpen();
       setResultFromServer(true);
+      global.localStorage.removeItem('answer');
     } catch (error) {
       handleClickOpen();
       setResultFromServer(false);

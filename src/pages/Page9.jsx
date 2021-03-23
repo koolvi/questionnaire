@@ -62,7 +62,14 @@ const Page9 = (props) => {
       </div>
       <Button
         disabled={(answer.answer.variantAnswer.length === 0)}
-        onClick={() => onClickNext(answer)}
+        onClick={() => onClickNext({
+          id: answer.id,
+          question: answer.question,
+          answer: [
+            { Ответ: answer.answer.variantAnswer },
+            { 'Кол-во': answer.answer.windowsCount },
+          ],
+        })}
       />
     </QuestionCardLayout>
   );

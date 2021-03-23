@@ -10,10 +10,15 @@ const Page1 = (props) => {
   const [answer, setAnswer] = useState({
     id: 1,
     question: 'Тут написан какой-то приветствующий текст, который предлагает пройти тест из 40+ вопросов',
+    // answer: {
+    //   name: '',
+    //   email: '',
+    //   phone: '',
+    // },
     answer: {
-      name: '',
-      email: '',
-      phone: '',
+      field0: { quest: 'ФИО', answ: '' },
+      field1: { quest: 'Email', answ: '' },
+      field2: { quest: 'Телефон', answ: '' },
     },
   });
 
@@ -21,7 +26,10 @@ const Page1 = (props) => {
     if (Number.isNaN(Number(writingText))) return;
     setAnswer({
       ...answer,
-      answer: { ...answer.answer, phone: writingText },
+      answer: {
+        ...answer.answer,
+        field2: { ...answer.answer.field2, answ: writingText },
+      },
     });
   };
 
@@ -33,33 +41,46 @@ const Page1 = (props) => {
       <div className={classes.answer}>
         <TextFieldInput
           label="ФИО"
-          value={answer.answer.name}
+          // value={answer.answer.name}
+          value={answer.answer.field0.answ}
           onChange={writingText => setAnswer({
             ...answer,
-            answer: { ...answer.answer, name: writingText },
+            answer: {
+              ...answer.answer,
+              field0: { ...answer.answer.field0, answ: writingText } },
           })}
         />
         <TextFieldInput
           label="Email"
-          value={answer.answer.email}
+          value={answer.answer.field1.answ}
           onChange={writingText => setAnswer({
             ...answer,
-            answer: { ...answer.answer, email: writingText },
+            answer: {
+              ...answer.answer,
+              field1: { ...answer.answer.field1, answ: writingText } },
           })}
         />
         <TextFieldInput
           label="Контактный телефон"
           helperText="Например: 9210001122"
-          value={answer.answer.phone}
+          value={answer.answer.field2.answ}
           onChange={writingText => getOnlyNumber(writingText)}
         />
       </div>
       <Button
         disabled={(
-          (answer.answer.name.length === 0)
-          || (answer.answer.email.length === 0)
-          || (answer.answer.phone.length === 0))}
-        onClick={() => onClickNext(answer)}
+          (answer.answer.field0.answ.length === 0)
+          || (answer.answer.field1.answ.length === 0)
+          || (answer.answer.field2.answ.length === 0))}
+        onClick={() => onClickNext({
+          id: 1,
+          question: 'Контактная информация',
+          answer: [
+            { [answer.answer.field0.quest]: answer.answer.field0.answ },
+            { [answer.answer.field1.quest]: answer.answer.field1.answ },
+            { [answer.answer.field2.quest]: answer.answer.field2.answ },
+          ],
+        })}
       />
     </QuestionCardLayout>
   );

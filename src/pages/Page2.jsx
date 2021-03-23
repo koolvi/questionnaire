@@ -20,6 +20,11 @@ const Page2 = (props) => {
       floor: '',
       roomsCount: '',
     },
+    // answer: {
+    //   field0: { quest: 'ФИО', answ: '' },
+    //   field1: { quest: 'Email', answ: '' },
+    //   field2: { quest: 'Телефон', answ: '' },
+    // },
   });
 
   const getOnlyNumber = (writingText) => {
@@ -101,7 +106,16 @@ const Page2 = (props) => {
           || (answer.answer.square.length === 0)
           || (answer.answer.floor.length === 0)
           || (answer.answer.roomsCount.length === 0))}
-        onClick={() => onClickNext(answer)}
+        onClick={() => onClickNext({
+          id: 2,
+          question: 'Информация об объекте',
+          answer: [
+            { Адрес: answer.answer.address },
+            { Площадь: answer.answer.square },
+            { Этаж: answer.answer.floor },
+            { 'Кол-во комнат': answer.answer.roomsCount },
+          ],
+        })}
       />
     </QuestionCardLayout>
   );

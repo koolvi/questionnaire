@@ -13,11 +13,11 @@ const Page19 = (props) => {
   const { classes, onClickNext } = props;
 
   const [answer, setAnswer] = useState({
-    field0: { quest: 'Объединять ли кухню с другим помещением?', answ: '' },
-    field1: { quest: 'Какой тип кухни предпочтительнее?', answ: '' },
-    field2: { quest: 'Барная стойка:', answ: '' },
-    field3: { quest: 'Кухонный остров:', answ: '' },
-    field4: { quest: 'Обеденный стол, рассчитанный на персон в количестве: ', answ: 0 },
+    field0: { quest: 'Объединять ли кухню с другим помещением', answ: '' },
+    field1: { quest: 'Какой тип кухни предпочтительнее', answ: '' },
+    field2: { quest: 'Барная стойка', answ: '' },
+    field3: { quest: 'Кухонный остров', answ: '' },
+    field4: { quest: 'Обеденный стол, рассчитанный на персон в количестве', answ: 0 },
   });
 
 
