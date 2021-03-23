@@ -21,6 +21,7 @@ const Page23 = (props) => {
       { id: 6, name: 'Сушильная машина', checked: false },
       { id: 7, name: 'Система очистки воды', checked: false },
       { id: 8, name: 'Бойлер', checked: false },
+      { id: 9, name: 'Сауна', checked: false },
     ],
     comments: '',
   });

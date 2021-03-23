@@ -13,30 +13,45 @@ const Page22 = (props) => {
   const [answer, setAnswer] = useState({
     id: 22,
     question: 'Укажите сколько телевизоров Вы бы хотели разместить в следующих помещениях',
-    answer: [
-      { id: 0, value: 0, name: 'Холл' },
-      { id: 1, value: 0, name: 'Кухня' },
-      { id: 2, value: 0, name: 'Столовая' },
-      { id: 3, value: 0, name: 'Гостиная' },
-      { id: 4, value: 0, name: 'Гостевая' },
-      { id: 5, value: 0, name: 'Спальня' },
-      { id: 6, value: 0, name: 'Детская' },
-      { id: 7, value: 0, name: 'Игровая' },
-      { id: 8, value: 0, name: 'Кабинет' },
-      { id: 9, value: 0, name: 'Терраса' },
-      { id: 10, value: 0, name: 'Балкон' },
-    ],
+    answer: [],
     comments: '',
   });
+  const [column1, setColumn1] = useState({
+    variantAnswer: [
+      { id: 0, value: 0, name: 'Прихожая' },
+      { id: 1, value: 0, name: 'Холл' },
+      { id: 2, value: 0, name: 'Кухня' },
+      { id: 3, value: 0, name: 'Столовая' },
+      { id: 4, value: 0, name: 'Гостиная' },
+    ],
+  });
+  const [column2, setColumn2] = useState({
+    variantAnswer: [
+      { id: 5, value: 0, name: 'Санузел общий' },
+      { id: 6, value: 0, name: 'Санузел раздельный' },
+      { id: 7, value: 0, name: 'Спальня' },
+      { id: 8, value: 0, name: 'Детская' },
+      { id: 9, value: 0, name: 'Игровая' },
+    ],
+  });
+  const [column3, setColumn3] = useState({
+    variantAnswer: [
+      { id: 10, value: 0, name: 'Кабинет' },
+      { id: 11, value: 0, name: 'Терраса' },
+      { id: 12, value: 0, name: 'Балкон' },
+      { id: 13, value: 0, name: 'Кинотеатр' },
+    ],
+  });
 
-  const handleValue = (variantAnswer, newValue) => {
-    const newAnswer = answer.answer.map((item) => {
+  const handleValue = (variantAnswer, newValue, column, setColumn) => {
+    const newAnswer = column.variantAnswer.map((item) => {
       if (item.id === variantAnswer.id) {
         return { id: item.id, value: newValue, name: item.name };
       }
       return item;
     });
-    setAnswer({ ...answer, answer: newAnswer });
+    setColumn({ variantAnswer: newAnswer });
+    // setAnswer({ ...answer, answer: newAnswer });
   };
 
   // получить список необходимых помещений (у которых кол-во НЕ ноль)
@@ -52,18 +67,50 @@ const Page22 = (props) => {
   const renderContent = () => {
     return (
       <div className={classes.allVariantsAnswers}>
-        {answer.answer.map(item => (
-          <div className={classes.variantAnswer} key={item.id}>
-            <Typography variant="caption">
-              {item.name}
-            </Typography>
-            <Counter
-              value={item.value}
-              // textLeft={item.name}
-              onClick={newValue => handleValue(item, newValue)}
-            />
-          </div>
-        ))}
+        <div>
+          {column1.variantAnswer.map(item => (
+            <div className={classes.variantAnswer} key={item.id}>
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
+              <Counter
+                value={item.value}
+                // textLeft={item.name}
+                onClick={newValue => handleValue(item, newValue, column1, setColumn1)}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div>
+          {column2.variantAnswer.map(item => (
+            <div className={classes.variantAnswer} key={item.id}>
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
+              <Counter
+                value={item.value}
+                // textLeft={item.name}
+                onClick={newValue => handleValue(item, newValue, column2, setColumn2)}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div>
+          {column3.variantAnswer.map(item => (
+            <div className={classes.variantAnswer} key={item.id}>
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
+              <Counter
+                value={item.value}
+                // textLeft={item.name}
+                onClick={newValue => handleValue(item, newValue, column3, setColumn3)}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -93,7 +140,7 @@ const Page22 = (props) => {
 const styles = {
   conteinerAnswer: {
     width: '100%',
-    marginBottom: '50px',
+    marginBottom: '30px',
     display: 'flex',
     justifyContent: 'flex-start',
     [`@media ${mediaQueries.mobile}`]: {
@@ -107,18 +154,28 @@ const styles = {
     flexDirection: 'column',
   },
   allVariantsAnswers: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: 'grid',
+    gridTemplateColumns: '200px 250px 200px',
+    // gridTemplateRows: 'repeat(8, 30px)',
+    gridColumnGap: '40px',
+    [`@media ${mediaQueries.mobile}`]: {
+      gridTemplateColumns: '300px',
+      gridTemplateRows: 'repeat(22, 40px)',
+      gridColumnGap: '0px',
+    },
+    // display: 'flex',
+    // flexWrap: 'wrap',
   },
   variantAnswer: {
+    // background: 'gray',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '50%',
-    marginBottom: '10px',
-    [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
-    },
+    // width: '50%',
+    // marginBottom: '10px',
+    // [`@media ${mediaQueries.mobile}`]: {
+    //   width: '50%',
+    // },
   },
   comments: {
     width: '100%',
