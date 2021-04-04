@@ -1,5 +1,6 @@
 const React = require('react');
 const { keys } = require('ramda');
+const { default: Typography } = require('@material-ui/core/Typography');
 
 const formatObjectAnswerItem = (answerItem) => {
   const key = keys(answerItem)[0];
@@ -12,7 +13,7 @@ const SimpleAnswer = (props) => {
 
   return (
     <div style={styles.answerItem}>
-      {answer}
+      <Typography>{answer}</Typography>
     </div>
   );
 };
@@ -29,55 +30,24 @@ const ArrayAnswer = (props) => {
   });
 };
 
-const Comment = (props) => {
-  const { comment } = props;
-
-  return (
-    <div style={styles.commentContainer}>
-      {comment}
-    </div>
-  );
-};
-
 const selectAnswerComponent = (answer) => {
   if (typeof answer === 'string') return SimpleAnswer;
   if (Array.isArray(answer)) return ArrayAnswer;
   return false;
 };
 
-const AnswerItem = (props) => {
-  const { answerData } = props;
-  const { id, question, answer, comment } = answerData;
+const Answer = (props) => {
+  const { answer } = props;
 
   const AnswerComponent = selectAnswerComponent(answer);
 
-  return (
-    <div style={styles.root}>
-      <div style={styles.question}>
-        {`${id}) ${question}`}
-      </div>
-
-      {AnswerComponent && <AnswerComponent answer={answer} />}
-
-      {Boolean(comment) && <Comment comment={comment} />}
-    </div>
-  );
+  return <AnswerComponent answer={answer} />;
 };
 
 const styles = {
-  root: {
-    marginBottom: 50,
-  },
-
-  question: {
-    fontWeight: 600,
-  },
-
-  commentContainer: {},
-
   answerItem: {
     padding: '8px 0px 0px 24px',
   },
 };
 
-module.exports = AnswerItem;
+module.exports = Answer;

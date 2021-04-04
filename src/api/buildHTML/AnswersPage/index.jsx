@@ -6,22 +6,15 @@ const AnswersPage = (props) => {
   const { answersData } = props;
 
   return (
-    <html lang="en" style={styles.html}>
-      <head>
-        <meta charSet="utf-8" />
-        <title>Answers</title>
-      </head>
-
-      <body style={styles.body}>
-        <div style={styles.root}>
-          <div style={styles.contentContainer}>
-            {answersData.map(answerData => (
-              <AnswerItem key={answerData.id} answerData={answerData} />
-            ))}
-          </div>
+    <body style={styles.body}>
+      <div style={styles.root}>
+        <div style={styles.contentContainer}>
+          {answersData.map(answerData => (
+            <AnswerItem key={answerData.id} answerData={answerData} />
+          ))}
         </div>
-      </body>
-    </html>
+      </div>
+    </body>
   );
 };
 
@@ -38,12 +31,13 @@ const styles = {
   root: {
     display: 'flex',
     justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
   },
 
   contentContainer: {
-    fontFamily: 'Arial',
+    // fontFamily: 'Arial',
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    // backgroundColor: '#f0f0f0',
     maxWidth: 1000,
   },
 };
