@@ -11,7 +11,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page13 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 13,
     question: 'Цветовое предпочтение в интерьере у членов семьи?',
@@ -129,6 +129,7 @@ const Page13 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         {(answer.answer.length !== 0) ? renderContent() : null}

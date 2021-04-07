@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import * as R from 'ramda';
 import axios from 'axios';
 import SimplePaper from './components/SimplePaper';
 import Footer from './components/Footer';
@@ -9,36 +11,36 @@ import mediaQueries from './mediaQueries';
 import AlertDialog from './components/AlertDialog';
 
 
-// import Page1 from './pages/Page1';
-// import Page2 from './pages/Page2';
-// import Page3 from './pages/Page3';
-// import Page4 from './pages/Page4';
-// import Page5 from './pages/Page5';
-// import Page6 from './pages/Page6';
-// import Page7 from './pages/Page7';
-// import Page8 from './pages/Page8';
-// import Page9 from './pages/Page9';
-// import Page10 from './pages/Page10';
-// import Page11 from './pages/Page11';
-// import Page12 from './pages/Page12';
-// import Page13 from './pages/Page13';
-// import Page14 from './pages/Page14';
-// import Page15 from './pages/Page15';
-// import Page16 from './pages/Page16';
-// import Page17 from './pages/Page17';
-// import Page18 from './pages/Page18';
-// import Page19 from './pages/Page19';
-// import Page20 from './pages/Page20';
-// import Page21 from './pages/Page21';
-// import Page22 from './pages/Page22';
-// import Page23 from './pages/Page23';
-// import Page24 from './pages/Page24';
-// import Page25 from './pages/Page25';
-// import Page26 from './pages/Page26';
-// import Page27 from './pages/Page27';
-// import Page28 from './pages/Page28';
-// import Page29 from './pages/Page29';
-// import Page30 from './pages/Page30';
+import Page1 from './pages/Page1';
+import Page2 from './pages/Page2';
+import Page3 from './pages/Page3';
+import Page4 from './pages/Page4';
+import Page5 from './pages/Page5';
+import Page6 from './pages/Page6';
+import Page7 from './pages/Page7';
+import Page8 from './pages/Page8';
+import Page9 from './pages/Page9';
+import Page10 from './pages/Page10';
+import Page11 from './pages/Page11';
+import Page12 from './pages/Page12';
+import Page13 from './pages/Page13';
+import Page14 from './pages/Page14';
+import Page15 from './pages/Page15';
+import Page16 from './pages/Page16';
+import Page17 from './pages/Page17';
+import Page18 from './pages/Page18';
+import Page19 from './pages/Page19';
+import Page20 from './pages/Page20';
+import Page21 from './pages/Page21';
+import Page22 from './pages/Page22';
+import Page23 from './pages/Page23';
+import Page24 from './pages/Page24';
+import Page25 from './pages/Page25';
+import Page26 from './pages/Page26';
+import Page27 from './pages/Page27';
+import Page28 from './pages/Page28';
+import Page29 from './pages/Page29';
+import Page30 from './pages/Page30';
 import Page31 from './pages/Page31';
 import Page32 from './pages/Page32';
 import Page33 from './pages/Page33';
@@ -69,37 +71,39 @@ const Main = (props) => {
   const [open, setOpen] = React.useState(false);
   const [resultFromServer, setResultFromServer] = React.useState(false);
   const [answersArr, setAnswersArr] = useState(getInitialState());
+  // текущий номер вопроса - в массиве, поэтому первый вопрос имеет номер 0
+  const [currentQuestionNumber, setCurrentQuestNumber] = useState(0);
   const questionsArr = [
-    // Page1,
-    // Page2,
-    // Page3,
-    // Page4,
-    // Page5,
-    // Page6,
-    // Page7,
-    // Page8,
-    // Page9,
-    // Page10,
-    // Page11,
-    // Page12,
-    // Page13,
-    // Page14,
-    // Page15,
-    // Page16,
-    // Page17,
-    // Page18,
-    // Page19,
-    // Page20,
-    // Page21,
-    // Page22,
-    // Page23,
-    // Page24,
-    // Page25,
-    // Page26,
-    // Page27,
-    // Page28,
-    // Page29,
-    // Page30,
+    Page1,
+    Page2,
+    Page3,
+    Page4,
+    Page5,
+    Page6,
+    Page7,
+    Page8,
+    Page9,
+    Page10,
+    Page11,
+    Page12,
+    Page13,
+    Page14,
+    Page15,
+    Page16,
+    Page17,
+    Page18,
+    Page19,
+    Page20,
+    Page21,
+    Page22,
+    Page23,
+    Page24,
+    Page25,
+    Page26,
+    Page27,
+    Page28,
+    Page29,
+    Page30,
     Page31,
     Page32,
     Page33,
@@ -143,16 +147,25 @@ const Main = (props) => {
   };
 
   const addAnswersToStateArr = (answer) => {
-    global.console.log('Ответ на вопрос=', answer);
-    const newAnswersArr = answersArr.concat(answer);
-    if (answer.id === 47) {
-      sendAnswerToServer(newAnswersArr);
-      return;
-    }
-    setAnswersArr(newAnswersArr);
+    global.console.log('Ответ на вопрос=', answer, answersArr);
+    if (answer.id > answersArr.length) {
+      const newAnswersArr = answersArr.concat(answer);
+      global.console.log('===', answer.id, answersArr.length, newAnswersArr);
+      if (answer.id === 47) {
+        sendAnswerToServer(newAnswersArr);
+        return;
+      }
+      setAnswersArr(newAnswersArr);
 
-    const newAnswersArrInStr = JSON.stringify(newAnswersArr);
-    global.console.log('включи сохр в локал сторадж', newAnswersArrInStr);
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // global.console.log('включи сохр в локал сторадж');
+      const newAnswersArrInStr = JSON.stringify(newAnswersArr);
+      global.localStorage.setItem('answer', newAnswersArrInStr);
+    } else {
+      const newAnswersArr = R.update((answer.id - 1), answer, answersArr);
+      setAnswersArr(newAnswersArr);
+    }
+    // const newAnswersArrInStr = JSON.stringify(newAnswersArr);
     // global.localStorage.setItem('answer', newAnswersArrInStr);
   };
 
@@ -160,8 +173,20 @@ const Main = (props) => {
     // global.console.log('questionsArr===', questionsArr);
     // global.console.log('answersArr.length===', answersArr.length);
     global.console.log('Полный ответ===', answersArr);
-    const Page = questionsArr[answersArr.length];
-    return <Page onClickNext={answer => addAnswersToStateArr(answer)} />;
+    // const Page = questionsArr[answersArr.length];
+    const Page = questionsArr[currentQuestionNumber];
+    return (
+      <Page
+      // стэйт принимает PREV - предыдущее значение, по факту текущее
+        onClickBack={(currentQuestionNumber === 0)
+          ? undefined
+          : () => setCurrentQuestNumber(prev => prev - 1)}
+        onClickNext={(answer) => {
+          setCurrentQuestNumber(prev => prev + 1);
+          addAnswersToStateArr(answer);
+        }}
+      />
+    );
   };
 
   const handleClose = () => {
@@ -177,6 +202,8 @@ const Main = (props) => {
 
   return (
     <div className={classes.container}>
+      {/* {window.innerHeight} */}
+      {/* {window.outerHeight} */}
       <div className={classes.main}>
         <div className={classes.progress}>
           <ProgressLinear
@@ -212,6 +239,7 @@ const styles = {
     background: '#f5f5f5',
     [`@media ${mediaQueries.mobile}`]: {
       background: 'white',
+      minHeight: '100%',
     },
   },
   main: {
@@ -223,6 +251,7 @@ const styles = {
     [`@media ${mediaQueries.mobile}`]: {
       // alignItems: 'none',
       justifyContent: 'flex-start',
+      height: 'auto',
       // flexDirection: 'column',
       // paddingLeft: '20px',
       // paddingTop: '30px',

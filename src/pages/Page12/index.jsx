@@ -28,7 +28,7 @@ import aclectika from './images/aclectika.png';
 
 
 const Page12 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 12,
     question: 'Отметьте какой стиль интерьера Вам нравится? (максимум можно отметить 3 варианта)',
@@ -193,6 +193,7 @@ const Page12 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         {renderContent()}

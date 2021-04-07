@@ -7,7 +7,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page38 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 38,
     question: 'Требуется ли спортивная зона?',
@@ -18,6 +18,7 @@ const Page38 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -43,6 +44,7 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

@@ -8,7 +8,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page36 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 36,
     question: 'Есть ли аллергия у проживающих? (на шерсть, на определенные материалы, на химию и другое)',
@@ -20,6 +20,7 @@ const Page36 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -54,6 +55,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

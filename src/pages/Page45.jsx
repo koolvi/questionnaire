@@ -7,7 +7,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page45 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 45,
     question: 'Требуется ли авторский надзор?',
@@ -18,6 +18,7 @@ const Page45 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -43,6 +44,7 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

@@ -8,7 +8,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page43 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 43,
     question: `Есть ли предпочтение по размеру и типу межкомнатных дверей? Одностворчатые, двустворчатые, со скрытым коробом,
@@ -23,6 +23,7 @@ const Page43 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -51,6 +52,7 @@ const styles = {
   answer: {
     marginBottom: '50px',
     width: '100%',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

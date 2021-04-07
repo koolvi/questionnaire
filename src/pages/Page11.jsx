@@ -7,7 +7,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page11 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 11,
     question: 'Напишите какое домашнее животное есть/планируется и в каком количестве (кошка, птица, рыбки и др.)? Ответ повлияет на использование антивандальных тканей и размещение места. Если животных нет - пропустите вопрос',
@@ -18,6 +18,7 @@ const Page11 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -38,6 +39,7 @@ const styles = {
   answer: {
     marginBottom: '50px',
     width: '100%',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

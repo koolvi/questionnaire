@@ -7,7 +7,7 @@ import DatePicker from '../components/DatePicker';
 
 
 const Page39 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 39,
     question: 'Когда планируете заехать в новое жилье?',
@@ -18,6 +18,7 @@ const Page39 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <DatePicker

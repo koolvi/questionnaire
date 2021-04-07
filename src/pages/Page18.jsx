@@ -11,7 +11,7 @@ import colors from '../style/colors';
 
 
 const Page18 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
 
   const [refrigerator, setRefrigerator] = useState({ size: '', type: '', article: '' });
   const [rangeHood, setRangeHood] = useState({ type: '' }); // вытяжка
@@ -63,6 +63,7 @@ const Page18 = (props) => {
       disableMarginPadding={true}
       questionNumber={18}
       questionText="Какая техника потребуется в кухне?"
+      onClickBack={onClickBack}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>

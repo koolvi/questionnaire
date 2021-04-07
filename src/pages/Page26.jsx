@@ -8,7 +8,7 @@ import Switch from '../components/Switch';
 
 
 const Page26 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [activeSwitch, setSwitch] = useState(false);
   const [answer, setAnswer] = useState({
     id: 26,
@@ -76,6 +76,7 @@ const Page26 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <div className={classes.containerSwitch}>

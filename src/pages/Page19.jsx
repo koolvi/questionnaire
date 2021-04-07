@@ -10,7 +10,7 @@ import colors from '../style/colors';
 
 
 const Page19 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
 
   const [answer, setAnswer] = useState({
     field0: { quest: 'Объединять ли кухню с другим помещением', answ: '' },
@@ -25,6 +25,7 @@ const Page19 = (props) => {
     <QuestionCardLayout
       questionNumber={19}
       questionText="Расположение кухни"
+      onClickBack={onClickBack}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>

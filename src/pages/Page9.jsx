@@ -8,7 +8,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page9 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 9,
     question: 'Требуется ли замена окон?',
@@ -22,6 +22,7 @@ const Page9 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -81,6 +82,7 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     justifyContent: 'flex-start',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

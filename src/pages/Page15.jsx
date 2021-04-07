@@ -8,7 +8,7 @@ import CheckboxLabel from '../components/CheckboxLabel';
 
 
 const Page15 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 15,
     question: 'Выберите орнамент, который стоит использовать в интерьере (который вам нравится), а так же можете написать свой вариант',
@@ -61,6 +61,7 @@ const Page15 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         {renderContent()}

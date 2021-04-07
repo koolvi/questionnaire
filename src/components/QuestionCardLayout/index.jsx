@@ -10,12 +10,13 @@ const QuestionCardLayout = (props) => {
     questionNumber,
     questionText,
     disableMarginPadding = false,
+    onClickBack,
     children,
   } = props;
 
   return (
     <div className={classes.container}>
-      <QuestionNumber questionNumber={questionNumber} />
+      <QuestionNumber questionNumber={questionNumber} onClickBack={onClickBack} />
       <div
         className={classes.contentContainer}
         style={{
@@ -34,16 +35,20 @@ const QuestionCardLayout = (props) => {
 
 const styles = {
   container: {
-    maxWidth: '900px',
+    minWidth: '800px',
+    maxWidth: '1000px',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
+      minWidth: 'auto',
+      maxWidth: 'auto',
     },
   },
   contentContainer: {
-    maxHeight: '500px',
+    minHeight: '450px',
+    maxHeight: '600px',
     overflowY: 'auto',
     // height: '100%',
     display: 'flex',
@@ -61,6 +66,10 @@ const styles = {
   obertka: {
     paddingBottom: '30px',
     paddingTop: '30px',
+    display: 'flex',
+    flexDirection: 'column',
+    // height: '100%',
+    flex: 1,
   },
 };
 

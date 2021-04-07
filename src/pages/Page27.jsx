@@ -7,7 +7,7 @@ import RadioGroup from '../components/RadioGroup';
 
 
 const Page27 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 27,
     question: 'Присутствие в интерьере камина',
@@ -18,6 +18,7 @@ const Page27 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -44,6 +45,7 @@ const styles = {
   answer: {
     marginBottom: '50px',
     width: '100%',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,

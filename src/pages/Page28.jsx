@@ -10,7 +10,7 @@ import QuestionCardLayout from '../components/QuestionCardLayout/index';
 
 
 const Page28 = (props) => {
-  const { classes, onClickNext } = props;
+  const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 28,
     question: 'Напишите какие имеющиеся у Вас предметы хотели бы учесть в интерьере?',
@@ -21,6 +21,7 @@ const Page28 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      onClickBack={onClickBack}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -46,6 +47,7 @@ const styles = {
   answer: {
     marginBottom: '50px',
     width: '100%',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,
