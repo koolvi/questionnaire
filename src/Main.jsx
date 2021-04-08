@@ -165,6 +165,7 @@ const Main = (props) => {
       const newAnswersArr = R.update((answer.id - 1), answer, answersArr);
       setAnswersArr(newAnswersArr);
     }
+    setCurrentQuestNumber(prev => prev + 1);
     // const newAnswersArrInStr = JSON.stringify(newAnswersArr);
     // global.localStorage.setItem('answer', newAnswersArrInStr);
   };
@@ -175,6 +176,7 @@ const Main = (props) => {
     global.console.log('Полный ответ===', answersArr);
     // const Page = questionsArr[answersArr.length];
     const Page = questionsArr[currentQuestionNumber];
+    global.console.log('Page', Page)
     return (
       <Page
       // стэйт принимает PREV - предыдущее значение, по факту текущее
@@ -182,7 +184,7 @@ const Main = (props) => {
           ? undefined
           : () => setCurrentQuestNumber(prev => prev - 1)}
         onClickNext={(answer) => {
-          setCurrentQuestNumber(prev => prev + 1);
+          // setCurrentQuestNumber(prev => prev + 1);
           addAnswersToStateArr(answer);
         }}
       />
@@ -193,6 +195,8 @@ const Main = (props) => {
     setOpen(false);
     global.localStorage.removeItem('answer');
     setAnswersArr([]);
+    
+    setCurrentQuestNumber(0);
   };
 
   const handleRepeat = () => {

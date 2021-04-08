@@ -64,10 +64,12 @@ const Page10 = (props) => {
 
   // получить список необходимых помещений (у которых кол-во НЕ ноль)
   const getListOfRequiredPremises = () => {
+    global.console.log('aaaaaaaaaaaaaaaaaaaaa');
     const arr1 = column1.variantAnswer.filter(item => (item.value !== 0));
     const arr2 = column2.variantAnswer.filter(item => (item.value !== 0));
     const arr3 = column3.variantAnswer.filter(item => (item.value !== 0));
     const newAnswer = [...arr1, ...arr2, ...arr3];
+    global.console.log('qqqqqqq', arr1, arr2, arr3, newAnswer);
     // массив, где элемент - это объект вида: {кухня: 2}
     const namesAndValuesArr = newAnswer.map(item => ({ [item.name]: item.value }));
     // массив, где перечеслены все помещения и их кол-во + комментарий
@@ -75,15 +77,15 @@ const Page10 = (props) => {
     onClickNext({ ...answer, answer: namesAndValuesArr });
   };
 
-  const checkEmptyAnswer = () => {
-    const arrNoEmptyAnswers = answer.answer.filter((item) => {
-      if (item.value !== 0) return true;
-      return false;
-    });
+  // const checkEmptyAnswer = () => {
+  //   const arrNoEmptyAnswers = answer.answer.filter((item) => {
+  //     if (item.value !== 0) return true;
+  //     return false;
+  //   });
 
-    if (arrNoEmptyAnswers.length === 0) return true;
-    return false;
-  };
+  //   if (arrNoEmptyAnswers.length === 0) return true;
+  //   return false;
+  // };
 
   const renderContent = () => {
     return (
@@ -155,7 +157,7 @@ const Page10 = (props) => {
         </div>
       </div>
       <Button
-        disabled={checkEmptyAnswer()}
+        // disabled={checkEmptyAnswer()}
         onClick={() => getListOfRequiredPremises()}
       />
     </QuestionCardLayout>

@@ -22,8 +22,8 @@ const Button = (props) => {
         className={classes.button}
         color={color}
         disabled={disabled}
-        {...rest}
         // disabled={false}
+        {...rest}
       >
         {text}
       </ButtonMUI>
