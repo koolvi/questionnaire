@@ -109,21 +109,24 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '100%',
+    },
   },
   allVariantsAnswers: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '170px 170px 250px',
-    // gridTemplateRows: 'repeat(5, 35px)',
+    [`@media ${mediaQueries.mobile}`]: {
+      gridTemplateColumns: '100%',
+      gridTemplateRows: 'repeat(14, 35px)',
+      width: '100%',
+    },
     gridColumnGap: '50px',
   },
   variantAnswer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // width: '50%',
-    // marginBottom: '10px',
     [`@media ${mediaQueries.mobile}`]: {
       // width: '50%',
     },
