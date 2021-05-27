@@ -401,10 +401,6 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     justifyContent: 'flex-start',
-    [`@media ${mediaQueries.mobile}`]: {
-      // width: '100%',
-      // flex: 1,
-    },
   },
   answer: {
     display: 'flex',
@@ -412,7 +408,6 @@ const styles = {
     flexDirection: 'column',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
-      // flex: 1,
     },
   },
   conteinerType: {
@@ -424,22 +419,16 @@ const styles = {
     },
   },
   name: {
-    // color: colors.PRIMARY,
-    // width: '100%',
     color: '#979fde',
     marginTop: '0px',
     marginBottom: '0px',
     background: '#dbdfff',
     paddingLeft: '30px',
-    // fontSize: '12px',
   },
   conteinerParam: {
     display: 'flex',
     flexDirection: 'column',
     paddingLeft: '30px',
-    [`@media ${mediaQueries.mobile}`]: {
-      // paddingLeft: '0px',
-    },
   },
   param: {
     display: 'flex',
@@ -457,10 +446,6 @@ const styles = {
   input: {
     flex: 1,
     paddingRight: '30px',
-    [`@media ${mediaQueries.mobile}`]: {
-      // paddingRight: '0px',
-      // flex: 0,
-    },
   },
 };
 
