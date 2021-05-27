@@ -105,12 +105,22 @@ const styles = {
       flex: 1,
     },
   },
+  containerSwitch: {
+    [`@media ${mediaQueries.mobile}`]: {
+      marginBottom: '30px',
+    },
+  },
   allCheckboxes: {
     // display: 'flex',
     // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '300px 450px',
     gridTemplateRows: 'repeat(7, 35px)',
+    [`@media ${mediaQueries.mobile}`]: {
+      gridTemplateColumns: '100%',
+      gridTemplateRows: 'repeat(14, 50px)',
+      width: '100%',
+    },
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
