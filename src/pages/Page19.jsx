@@ -162,10 +162,20 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
+    [`@media ${mediaQueries.mobile}`]: {
+      flexDirection: 'column',
+      alignItems: 'initial',
+      marginBottom: '30px',
+    },
   },
   boxQuest: {
     marginRight: '20px',
     color: colors.PRIMARY,
+    [`@media ${mediaQueries.mobile}`]: {
+      marginRight: '0px',
+      fontSize: '12px',
+      height: '30px',
+    },
   },
   boxAnswers: {
     display: 'flex',
