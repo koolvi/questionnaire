@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import RadioGroup from '../components/RadioGroup';
 import Button from '../components/Button';
 import Counter from '../components/Counter';
@@ -25,10 +26,14 @@ const Page18 = (props) => {
   const [wineCooler, setWineCooler] = useState({ text: '' }); // винный холодильник
   const [other, setOther] = useState({ text: '' });
 
+
+  const isMobile = useMediaQuery(mediaQueries.mobile);
+
   const checkForDisabled = () => {
     if (refrigerator.type.length === 0) return true;
     if (rangeHood.type.length === 0) return true;
-    if ((cookingSurface.type.length === 0) || (cookingSurface.burners === 0)) return true;
+    if (cookingSurface.type.length === 0) return true;
+    // if ((cookingSurface.type.length === 0) || (cookingSurface.burners === 0)) return true;
     if (oven.type.length === 0) return true;
     if (microwave.type.length === 0) return true;
     if (coffeeMachine.type.length === 0) return true;
@@ -74,30 +79,33 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={refrigerator.type}
                   onChange={e => setRefrigerator({ ...refrigerator, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Встраиваемый', label: 'Встраиваемый' },
-                    { id: 1, value: 'Отдельностоящий', label: 'Отдельностоящий' },
-                    { id: 2, value: 'Side-by-Side', label: 'Side-by-Side' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Встраиваемый', label: 'Встраиваемый' },
+                    { id: 2, value: 'Отдельностоящий', label: 'Отдельностоящий' },
+                    { id: 3, value: 'Side-by-Side', label: 'Side-by-Side' },
                   ]}
                 />
               </div>
               <div className={classes.param}>
-                {/* <p className={classes.paramName}>Размер</p> */}
                 <div className={classes.input}>
                   <TextFieldInput
-                    label="Размер"
+                    label="Размер (обязательно)"
                     value={refrigerator.size}
                     onChange={writingText => setRefrigerator({ ...refrigerator, size: writingText })}
                   />
                 </div>
               </div>
               <div className={classes.param}>
-                {/* <p className={classes.paramName}>Артикул (если имеется)</p> */}
                 <div className={classes.input}>
                   <TextFieldInput
                     label="Артикул (если имеется)"
@@ -115,19 +123,24 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  style={{ width: '400px' }}
-                  row
+                  style={{ width: (isMobile) ? 'auto' : '400px' }}
+                  isItalicText
+                  row={(isMobile) ? false : true}
                   value={rangeHood.type}
                   onChange={e => setRangeHood({ ...rangeHood, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Встроенная', label: 'Встроенная' },
-                    { id: 1, value: 'Купольная', label: 'Купольная' },
-                    { id: 2, value: 'Островная', label: 'Островная' },
-                    { id: 3, value: 'Наклонная', label: 'Наклонная' },
-                    { id: 4, value: 'Плоская', label: 'Плоская' },
-                    { id: 5, value: 'Угловая', label: 'Угловая' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Встроенная', label: 'Встроенная' },
+                    { id: 2, value: 'Купольная', label: 'Купольная' },
+                    { id: 3, value: 'Островная', label: 'Островная' },
+                    { id: 4, value: 'Наклонная', label: 'Наклонная' },
+                    { id: 5, value: 'Плоская', label: 'Плоская' },
+                    { id: 6, value: 'Угловая', label: 'Угловая' },
                   ]}
                 />
               </div>
@@ -140,24 +153,33 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={cookingSurface.type}
                   onChange={e => setCookingSurface({ ...cookingSurface, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Газовая', label: 'Газовая' },
-                    { id: 1, value: 'Электрическая', label: 'Электрическая' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Газовая', label: 'Газовая' },
+                    { id: 2, value: 'Электрическая', label: 'Электрическая' },
                   ]}
                 />
               </div>
-              <div className={classes.param}>
-                <p className={classes.paramName}>Кол-во конфорок</p>
-                <Counter
-                  value={cookingSurface.burners}
-                  onClick={newValue => setCookingSurface({ ...cookingSurface, burners: newValue })}
-                />
-              </div>
+              {(cookingSurface.type === 'Не требуется')
+                ? null
+                : (
+                  <div className={classes.param}>
+                    <p className={classes.paramName}>Кол-во конфорок (обязат. поле)</p>
+                    <Counter
+                      value={cookingSurface.burners}
+                      onClick={newValue => setCookingSurface({ ...cookingSurface, burners: newValue })}
+                    />
+                  </div>)
+              }
             </div>
           </div>
 {/* духовой шкаф */}
@@ -167,17 +189,19 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>Духовой шкаф</p>
-                </div> */}
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={oven.type}
                   onChange={e => setOven({ ...oven, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Газовый', label: 'Газовый' },
-                    { id: 1, value: 'Электрический', label: 'Электрический' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Газовый', label: 'Газовый' },
+                    { id: 2, value: 'Электрический', label: 'Электрический' },
                   ]}
                 />
               </div>
@@ -190,17 +214,19 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>СВЧ</p>
-                </div> */}
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={microwave.type}
                   onChange={e => setMicrowave({ ...microwave, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Встраиваемая', label: 'Встраиваемая' },
-                    { id: 1, value: 'Отдельностоящая', label: 'Отдельностоящая' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Встраиваемая', label: 'Встраиваемая' },
+                    { id: 2, value: 'Отдельностоящая', label: 'Отдельностоящая' },
                   ]}
                 />
               </div>
@@ -213,17 +239,19 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>Кофемашина</p>
-                </div> */}
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={coffeeMachine.type}
                   onChange={e => setCoffeeMachine({ ...coffeeMachine, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Встраиваемая', label: 'Встраиваемая' },
-                    { id: 1, value: 'Отдельностоящая', label: 'Отдельностоящая' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Встраиваемая', label: 'Встраиваемая' },
+                    { id: 2, value: 'Отдельностоящая', label: 'Отдельностоящая' },
                   ]}
                 />
               </div>
@@ -236,15 +264,19 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={dishwasher.type}
                   onChange={e => setDishwasher({ ...dishwasher, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Ширина 45', label: 'Ширина 45' },
-                    { id: 1, value: 'Ширина 60', label: 'Ширина 60' },
-                    { id: 2, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Ширина 45', label: 'Ширина 45' },
+                    { id: 2, value: 'Ширина 60', label: 'Ширина 60' },
                   ]}
                 />
               </div>
@@ -257,18 +289,19 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>Морозильная камера</p>
-                </div> */}
-                <p className={classes.paramName}>Тип</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Тип</p>
+                }
                 <RadioGroup
-                  row
+                  row={(isMobile) ? false : true}
+                  isItalicText
                   value={freezer.type}
                   onChange={e => setFreezer({ ...freezer, type: e.target.value })}
                   answerVariants={[
-                    { id: 0, value: 'Отдельностоящая', label: 'Отдельностоящая' },
-                    { id: 1, value: 'Встраиваемая', label: 'Встраиваемая' },
-                    { id: 2, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 0, value: 'Не требуется', label: 'Не требуется' },
+                    { id: 1, value: 'Отдельностоящая', label: 'Отдельностоящая' },
+                    { id: 2, value: 'Встраиваемая', label: 'Встраиваемая' },
                   ]}
                 />
               </div>
@@ -291,10 +324,10 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>Измельчитель в мойке</p>
-                </div> */}
-                <p className={classes.paramName}>Наличие</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Наличие</p>
+                }
                 <RadioGroup
                   row
                   value={shredder.type}
@@ -314,10 +347,10 @@ const Page18 = (props) => {
             </div>
             <div className={classes.conteinerParam}>
               <div className={classes.param}>
-                {/* <div className={classes.name}>
-                  <p>Винный холодильник</p>
-                </div> */}
-                <p className={classes.paramName}>Наличие</p>
+                {(isMobile)
+                  ? null
+                  : <p className={classes.paramName}>Наличие</p>
+                }
                 <RadioGroup
                   row
                   value={wineCooler.type}
@@ -368,34 +401,29 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     justifyContent: 'flex-start',
-    [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
-    },
   },
   answer: {
     display: 'flex',
-    // display: 'grid',
-    // gridTemplateColumns: '500px 500px',
-    // gridTemplateRows: 'repeat(6, 70px)',
-    // gridColumnGap: '40px',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '100%',
+    },
   },
   conteinerType: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    [`@media ${mediaQueries.mobile}`]: {
+      marginBottom: '40px',
+    },
   },
   name: {
-    // color: colors.PRIMARY,
-    // width: '100%',
     color: '#979fde',
     marginTop: '0px',
     marginBottom: '0px',
     background: '#dbdfff',
     paddingLeft: '30px',
-    // fontSize: '12px',
   },
   conteinerParam: {
     display: 'flex',
@@ -409,6 +437,11 @@ const styles = {
   paramName: {
     marginRight: '80px',
     color: 'gray',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '150px',
+      marginRight: '60px',
+      color: 'black',
+    },
   },
   input: {
     flex: 1,
