@@ -22,13 +22,13 @@ import AlertDialog from './components/AlertDialog';
 // import Page9 from './pages/Page9';
 // import Page10 from './pages/Page10';
 // import Page11 from './pages/Page11';
-import Page12 from './pages/Page12';
+// import Page12 from './pages/Page12';
 // import Page13 from './pages/Page13';
 // import Page14 from './pages/Page14';
 // import Page15 from './pages/Page15';
 // import Page16 from './pages/Page16';
 // import Page17 from './pages/Page17';
-// import Page18 from './pages/Page18';
+import Page18 from './pages/Page18';
 // import Page19 from './pages/Page19';
 // import Page20 from './pages/Page20';
 // import Page21 from './pages/Page21';
@@ -85,13 +85,13 @@ const Main = (props) => {
     // Page9,
     // Page10,
     // Page11,
-    Page12,
+    // Page12,
     // Page13,
     // Page14,
     // Page15,
     // Page16,
     // Page17,
-    // Page18,
+    Page18,
     // Page19,
     // Page20,
     // Page21,
