@@ -105,10 +105,18 @@ const styles = {
   allCheckboxes: {
     display: 'flex',
     flexWrap: 'wrap',
+    [`@media ${mediaQueries.mobile}`]: {
+      [`@media ${mediaQueries.mobile}`]: {
+        display: 'grid',
+        gridTemplateColumns: '100%',
+        gridTemplateRows: 'repeat(15, 30px)',
+        width: '100%',
+      },
+    },
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      width: '100%',
     },
     width: '33%',
   },
