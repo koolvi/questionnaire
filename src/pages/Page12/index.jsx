@@ -3,6 +3,7 @@
 //
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 // import Typography from '@material-ui/core/Typography';
 // import HelpIcon from '@material-ui/icons/Help';
 // import Popover from '@material-ui/core/Popover';
@@ -11,6 +12,7 @@ import Button from '../../components/Button';
 import mediaQueries from '../../mediaQueries';
 import QuestionCardLayout from '../../components/QuestionCardLayout/index';
 // import CheckboxLabel from '../../components/CheckboxLabel';
+import ItemCard from './ItemCard';
 import ItemWithPopover from './ItemWithPopover';
 
 import scandinavian from './images/scandinavian.png';
@@ -144,6 +146,7 @@ const Page12 = (props) => {
     ],
     comments: '',
   });
+  const isMobile = useMediaQuery(mediaQueries.mobile);
 
   const handleNameChecked = (selectedId) => {
     const newAnswer = answer.answer.map((item) => {
@@ -153,6 +156,7 @@ const Page12 = (props) => {
           name: item.name,
           imgSrc: item.imgSrc,
           checked: !item.checked,
+          description: item.description,
         };
       }
       return item;
@@ -178,13 +182,24 @@ const Page12 = (props) => {
   const renderContent = () => {
     return (
       <div className={classes.allListItems}>
-        {answer.answer.map(item => (
-          <ItemWithPopover
-            disabledCheckbox={canSelectStyle()}
-            item={item}
-            handleNameChecked={handleNameChecked}
-          />
-        ))}
+        {(isMobile)
+          ? (
+            answer.answer.map(item => (
+              <ItemCard
+                disabledCheckbox={canSelectStyle()}
+                item={item}
+                handleNameChecked={handleNameChecked}
+              />
+            )))
+          : (
+            answer.answer.map(item => (
+              <ItemWithPopover
+                disabledCheckbox={canSelectStyle()}
+                item={item}
+                handleNameChecked={handleNameChecked}
+              />
+            )))
+        }
       </div>
     );
   };

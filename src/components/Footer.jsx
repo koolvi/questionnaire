@@ -5,10 +5,11 @@ import mediaQueries from '../mediaQueries';
 
 
 const Footer = (props) => {
-  const { classes } = props;
+  const { classes, children } = props;
   return (
     <div className={classes.container}>
       <Typography variant="overline" className={classes.text}>Ваш дизайнер - Катерина Барт</Typography>
+      {children}
     </div>
   );
 };
@@ -21,6 +22,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '40px',
+    position: 'fixed',
+    bottom: 0,
+    // background: 'red',
   },
   text: {
     color: '#9e9e9e',

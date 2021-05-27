@@ -44,18 +44,16 @@ const styles = {
       flexDirection: 'column',
       minWidth: 'auto',
       maxWidth: 'auto',
+      position: 'fixed',
+      top: 0,
     },
   },
   contentContainer: {
     minHeight: '450px',
     maxHeight: '600px',
     overflowY: 'auto',
-    // height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
-    // paddingRight: '30px',
-    // paddingLeft: '30px',
     [`@media ${mediaQueries.mobile}`]: {
       height: 'auto',
       flex: 1,
@@ -68,7 +66,6 @@ const styles = {
     paddingTop: '30px',
     display: 'flex',
     flexDirection: 'column',
-    // height: '100%',
     flex: 1,
   },
 };

@@ -70,14 +70,14 @@ const Page22 = (props) => {
         <div>
           {column1.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
-              <Typography variant="body2">
-                {item.name}
-              </Typography>
               <Counter
                 value={item.value}
                 // textLeft={item.name}
                 onClick={newValue => handleValue(item, newValue, column1, setColumn1)}
               />
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
             </div>
           ))}
         </div>
@@ -85,14 +85,14 @@ const Page22 = (props) => {
         <div>
           {column2.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
-              <Typography variant="body2">
-                {item.name}
-              </Typography>
               <Counter
                 value={item.value}
                 // textLeft={item.name}
                 onClick={newValue => handleValue(item, newValue, column2, setColumn2)}
               />
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
             </div>
           ))}
         </div>
@@ -100,14 +100,14 @@ const Page22 = (props) => {
         <div>
           {column3.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
-              <Typography variant="body2">
-                {item.name}
-              </Typography>
               <Counter
                 value={item.value}
                 // textLeft={item.name}
                 onClick={newValue => handleValue(item, newValue, column3, setColumn3)}
               />
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
             </div>
           ))}
         </div>
@@ -153,6 +153,9 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '100%',
+    },
   },
   allVariantsAnswers: {
     display: 'grid',
@@ -160,9 +163,12 @@ const styles = {
     // gridTemplateRows: 'repeat(8, 30px)',
     gridColumnGap: '40px',
     [`@media ${mediaQueries.mobile}`]: {
-      gridTemplateColumns: '300px',
-      gridTemplateRows: 'repeat(22, 40px)',
-      gridColumnGap: '0px',
+      // gridTemplateColumns: '300px',
+      // gridTemplateRows: 'repeat(22, 40px)',
+      // gridColumnGap: '0px',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
     },
     // display: 'flex',
     // flexWrap: 'wrap',
@@ -171,7 +177,8 @@ const styles = {
     // background: 'gray',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    width: '100%',
     // width: '50%',
     // marginBottom: '10px',
     // [`@media ${mediaQueries.mobile}`]: {

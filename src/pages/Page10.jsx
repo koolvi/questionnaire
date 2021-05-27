@@ -93,14 +93,14 @@ const Page10 = (props) => {
         <div>
           {column1.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
-              <Typography variant="body2">
-                {item.name}
-              </Typography>
               <Counter
                 value={item.value}
                 // textLeft={item.name}
                 onClick={newValue => handleValue(item, newValue, column1, setColumn1)}
               />
+              <Typography variant="body2">
+                {item.name}
+              </Typography>
             </div>
           ))}
         </div>
@@ -108,14 +108,13 @@ const Page10 = (props) => {
         <div>
           {column2.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
+              <Counter
+                value={item.value}
+                onClick={newValue => handleValue(item, newValue, column2, setColumn2)}
+              />
               <Typography variant="body2">
                 {item.name}
               </Typography>
-              <Counter
-                value={item.value}
-                // textLeft={item.name}
-                onClick={newValue => handleValue(item, newValue, column2, setColumn2)}
-              />
             </div>
           ))}
         </div>
@@ -123,14 +122,13 @@ const Page10 = (props) => {
         <div>
           {column3.variantAnswer.map(item => (
             <div className={classes.variantAnswer} key={item.id}>
+              <Counter
+                value={item.value}
+                onClick={newValue => handleValue(item, newValue, column3, setColumn3)}
+              />
               <Typography variant="body2">
                 {item.name}
               </Typography>
-              <Counter
-                value={item.value}
-                // textLeft={item.name}
-                onClick={newValue => handleValue(item, newValue, column3, setColumn3)}
-              />
             </div>
           ))}
         </div>
@@ -156,10 +154,12 @@ const Page10 = (props) => {
           </div>
         </div>
       </div>
+      {/* <div className={classes.button}> */}
       <Button
         // disabled={checkEmptyAnswer()}
         onClick={() => getListOfRequiredPremises()}
       />
+      {/* </div> */}
     </QuestionCardLayout>
   );
 };
@@ -179,34 +179,38 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: '100%',
+    },
   },
   allVariantsAnswers: {
     display: 'grid',
-    gridTemplateColumns: '250px 200px 200px',
-    // gridTemplateRows: 'repeat(8, 30px)',
+    gridTemplateColumns: '250px 200px 250px',
     gridColumnGap: '40px',
     [`@media ${mediaQueries.mobile}`]: {
-      gridTemplateColumns: '300px',
-      gridTemplateRows: 'repeat(22, 40px)',
-      gridColumnGap: '0px',
+      // background: 'red',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
     },
-    // display: 'flex',
-    // flexWrap: 'wrap',
   },
   variantAnswer: {
-    // background: 'gray',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    // width: '50%',
-    // marginBottom: '10px',
-    // [`@media ${mediaQueries.mobile}`]: {
-    //   width: '50%',
-    // },
+    justifyContent: 'flex-start',
   },
   comments: {
     width: '100%',
   },
+  // button: {
+  //   [`@media ${mediaQueries.mobile}`]: {
+  //     position: 'fixed',
+  //     bottom: 70,
+  //     display: 'flex',
+  //     justifyContent: 'center',
+  //     width: '100%',
+  //   },
+  // },
 };
 
 export default withStyles(styles)(Page10);

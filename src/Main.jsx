@@ -11,27 +11,27 @@ import mediaQueries from './mediaQueries';
 import AlertDialog from './components/AlertDialog';
 
 
-import Page1 from './pages/Page1';
-import Page2 from './pages/Page2';
-import Page3 from './pages/Page3';
-import Page4 from './pages/Page4';
-import Page5 from './pages/Page5';
-import Page6 from './pages/Page6';
-import Page7 from './pages/Page7';
-import Page8 from './pages/Page8';
-import Page9 from './pages/Page9';
-import Page10 from './pages/Page10';
-import Page11 from './pages/Page11';
+// import Page1 from './pages/Page1';
+// import Page2 from './pages/Page2';
+// import Page3 from './pages/Page3';
+// import Page4 from './pages/Page4';
+// import Page5 from './pages/Page5';
+// import Page6 from './pages/Page6';
+// import Page7 from './pages/Page7';
+// import Page8 from './pages/Page8';
+// import Page9 from './pages/Page9';
+// import Page10 from './pages/Page10';
+// import Page11 from './pages/Page11';
 import Page12 from './pages/Page12';
-import Page13 from './pages/Page13';
-import Page14 from './pages/Page14';
-import Page15 from './pages/Page15';
-import Page16 from './pages/Page16';
-import Page17 from './pages/Page17';
-import Page18 from './pages/Page18';
-import Page19 from './pages/Page19';
-import Page20 from './pages/Page20';
-import Page21 from './pages/Page21';
+// import Page13 from './pages/Page13';
+// import Page14 from './pages/Page14';
+// import Page15 from './pages/Page15';
+// import Page16 from './pages/Page16';
+// import Page17 from './pages/Page17';
+// import Page18 from './pages/Page18';
+// import Page19 from './pages/Page19';
+// import Page20 from './pages/Page20';
+// import Page21 from './pages/Page21';
 import Page22 from './pages/Page22';
 import Page23 from './pages/Page23';
 import Page24 from './pages/Page24';
@@ -74,27 +74,27 @@ const Main = (props) => {
   // текущий номер вопроса - в массиве, поэтому первый вопрос имеет номер 0
   const [currentQuestionNumber, setCurrentQuestNumber] = useState(0);
   const questionsArr = [
-    Page1,
-    Page2,
-    Page3,
-    Page4,
-    Page5,
-    Page6,
-    Page7,
-    Page8,
-    Page9,
-    Page10,
-    Page11,
+    // Page1,
+    // Page2,
+    // Page3,
+    // Page4,
+    // Page5,
+    // Page6,
+    // Page7,
+    // Page8,
+    // Page9,
+    // Page10,
+    // Page11,
     Page12,
-    Page13,
-    Page14,
-    Page15,
-    Page16,
-    Page17,
-    Page18,
-    Page19,
-    Page20,
-    Page21,
+    // Page13,
+    // Page14,
+    // Page15,
+    // Page16,
+    // Page17,
+    // Page18,
+    // Page19,
+    // Page20,
+    // Page21,
     Page22,
     Page23,
     Page24,
@@ -209,13 +209,24 @@ const Main = (props) => {
       {/* {window.innerHeight} */}
       {/* {window.outerHeight} */}
       <div className={classes.main}>
-        <div className={classes.progress}>
+        {(isMobile)
+          ? null
+          : (
+            <div className={classes.progress}>
+              <ProgressLinear
+                currentValue={answersArr.length + 1}
+                maxValue={47}
+                minValue={1}
+              />
+            </div>
+          )}
+        {/* <div className={classes.progress}>
           <ProgressLinear
             currentValue={answersArr.length + 1}
             maxValue={47}
             minValue={1}
           />
-        </div>
+        </div> */}
         {(isMobile)
           ? renderPage()
           : (
@@ -230,7 +241,19 @@ const Main = (props) => {
           )
         }
       </div>
-      <Footer />
+      <Footer>
+        {(isMobile)
+          ? (
+            <div className={classes.progress}>
+              <ProgressLinear
+                currentValue={answersArr.length + 1}
+                maxValue={47}
+                minValue={1}
+              />
+            </div>
+          )
+          : null}
+      </Footer>
     </div>
   );
 };
@@ -266,6 +289,10 @@ const styles = {
     width: '100%',
     position: 'fixed',
     top: 0,
+    [`@media ${mediaQueries.mobile}`]: {
+      bottom: 0,
+      top: 'initial',
+    },
   },
 };
 
