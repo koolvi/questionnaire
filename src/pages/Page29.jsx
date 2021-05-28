@@ -106,12 +106,10 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     [`@media ${mediaQueries.mobile}`]: {
-      [`@media ${mediaQueries.mobile}`]: {
-        display: 'grid',
-        gridTemplateColumns: '100%',
-        gridTemplateRows: 'repeat(15, 30px)',
-        width: '100%',
-      },
+      display: 'grid',
+      gridTemplateColumns: '100%',
+      gridTemplateRows: 'repeat(15, 30px)',
+      width: '100%',
     },
   },
   checkbox: {
