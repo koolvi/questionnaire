@@ -17,7 +17,7 @@ const Page37 = (props) => {
       { id: 2, name: 'Повышение комфорта и уюта', checked: false },
       { id: 3, name: 'Увеличение мест хранения', checked: false },
       { id: 4, name: 'Эргономичность интерьера', checked: false },
-      { id: 5, name: 'Высокотехнологичный интерьер оснащенный современными инновациями', checked: false },
+      { id: 5, name: 'Высокотехнологичный интерьер (современные инновации)', checked: false },
       { id: 6, name: 'Спокойный интерьер', checked: false },
       { id: 7, name: 'Экстравагантный интерьер', checked: false },
       { id: 8, name: 'Яркий интерьер', checked: false },
@@ -91,17 +91,19 @@ const styles = {
     },
   },
   allCheckboxes: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '700px',
     gridTemplateRows: 'repeat(9, 33px)',
+    [`@media ${mediaQueries.mobile}`]: {
+      gridTemplateColumns: '100%',
+      gridTemplateRows: 'repeat(9, 50px)',
+      width: '100%',
+    },
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      // width: '50%',
+      width: '100%',
     },
-    // width: '33%',
   },
 };
 
