@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import RadioGroup from '../components/RadioGroup';
@@ -17,7 +16,7 @@ const Page19 = (props) => {
     field1: { quest: 'Какой тип кухни предпочтительнее', answ: '' },
     field2: { quest: 'Барная стойка', answ: '' },
     field3: { quest: 'Кухонный остров', answ: '' },
-    field4: { quest: 'Обеденный стол, рассчитанный на персон в количестве', answ: 0 },
+    field4: { quest: 'Обеденный стол, количество мест', answ: 0 },
   });
 
 
@@ -26,10 +25,33 @@ const Page19 = (props) => {
       questionNumber={19}
       questionText="Расположение кухни"
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={(
+            (answer.field0.answ.length === 0)
+            || (answer.field1.answ.length === 0)
+            || (answer.field2.answ.length === 0)
+            || (answer.field3.answ.length === 0)
+          )}
+          onClick={() => onClickNext({
+            id: 19,
+            question: 'Расположение кухни',
+            answer: [
+              { [answer.field0.quest]: answer.field0.answ },
+              { [answer.field1.quest]: answer.field1.answ },
+              { [answer.field2.quest]: answer.field2.answ },
+              { [answer.field3.quest]: answer.field3.answ },
+              { [answer.field4.quest]: answer.field4.answ },
+            ],
+          })}
+        />
+      )}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
-{/* 0 */}
+
+          {/* 0 */}
+
           <div className={classes.box}>
             <div className={classes.boxQuest}>
               <p>{answer.field0.quest}</p>
@@ -38,7 +60,10 @@ const Page19 = (props) => {
               <RadioGroup
                 row
                 value={answer.field0.answ}
-                onChange={e => setAnswer({ ...answer, field0: { ...answer.field0, answ: e.target.value }})}
+                onChange={e => setAnswer({
+                  ...answer,
+                  field0: { ...answer.field0, answ: e.target.value },
+                })}
                 answerVariants={[
                   { id: 0, value: 'Да', label: 'Да' },
                   { id: 1, value: 'Нет', label: 'Нет' },
@@ -46,7 +71,9 @@ const Page19 = (props) => {
               />
             </div>
           </div>
-{/* 1 */}
+
+          {/* 1 */}
+
           <div className={classes.box}>
             <div className={classes.boxQuest}>
               <p>{answer.field1.quest}</p>
@@ -55,7 +82,10 @@ const Page19 = (props) => {
               <RadioGroup
                 row
                 value={answer.field1.answ}
-                onChange={e => setAnswer({ ...answer, field1: { ...answer.field1, answ: e.target.value }})}
+                onChange={e => setAnswer({
+                  ...answer,
+                  field1: { ...answer.field1, answ: e.target.value },
+                })}
                 answerVariants={[
                   { id: 0, value: 'Прямая', label: 'Прямая' },
                   { id: 1, value: 'Угловая', label: 'Угловая' },
@@ -63,7 +93,9 @@ const Page19 = (props) => {
               />
             </div>
           </div>
-{/* 2 */}
+
+          {/* 2 */}
+
           <div className={classes.box}>
             <div className={classes.boxQuest}>
               <p>{answer.field2.quest}</p>
@@ -72,7 +104,10 @@ const Page19 = (props) => {
               <RadioGroup
                 row
                 value={answer.field2.answ}
-                onChange={e => setAnswer({ ...answer, field2: { ...answer.field2, answ: e.target.value }})}
+                onChange={e => setAnswer({
+                  ...answer,
+                  field2: { ...answer.field2, answ: e.target.value },
+                })}
                 answerVariants={[
                   { id: 0, value: 'Не требуется', label: 'Не требуется' },
                   { id: 1, value: 'Требуется', label: 'Требуется' },
@@ -80,7 +115,9 @@ const Page19 = (props) => {
               />
             </div>
           </div>
-{/* 3 */}
+
+          {/* 3 */}
+
           <div className={classes.box}>
             <div className={classes.boxQuest}>
               <p>{answer.field3.quest}</p>
@@ -89,7 +126,10 @@ const Page19 = (props) => {
               <RadioGroup
                 row
                 value={answer.field3.answ}
-                onChange={e => setAnswer({ ...answer, field3: { ...answer.field3, answ: e.target.value }})}
+                onChange={e => setAnswer({
+                  ...answer,
+                  field3: { ...answer.field3, answ: e.target.value },
+                })}
                 answerVariants={[
                   { id: 0, value: 'Не требуется', label: 'Не требуется' },
                   { id: 1, value: 'Требуется', label: 'Требуется' },
@@ -97,41 +137,28 @@ const Page19 = (props) => {
               />
             </div>
           </div>
-{/* 4 */}
+
+          {/* 4 */}
+
           <div className={classes.box}>
             <div className={classes.boxQuest}>
               <p>{answer.field4.quest}</p>
             </div>
             <div className={classes.boxAnswers}>
-              <Counter
-                value={answer.field4.answ}
-                onClick={newValue => setAnswer({ ...answer, field4: { ...answer.field4, answ: newValue }})}
-              />
+              <div className={classes.counter}>
+                <Counter
+                  value={answer.field4.answ}
+                  onClick={newValue => setAnswer({
+                    ...answer, field4: { ...answer.field4, answ: newValue },
+                  })}
+                />
+              </div>
             </div>
           </div>
 
 
         </div>
       </div>
-      <Button
-        disabled={(
-          (answer.field0.answ.length === 0)
-          || (answer.field1.answ.length === 0)
-          || (answer.field2.answ.length === 0)
-          || (answer.field3.answ.length === 0)
-        )}
-        onClick={() => onClickNext({
-          id: 19,
-          question: 'Расположение кухни',
-          answer: [
-            { [answer.field0.quest]: answer.field0.answ },
-            { [answer.field1.quest]: answer.field1.answ },
-            { [answer.field2.quest]: answer.field2.answ },
-            { [answer.field3.quest]: answer.field3.answ },
-            { [answer.field4.quest]: answer.field4.answ },
-          ],
-        })}
-      />
     </QuestionCardLayout>
   );
 };
@@ -151,6 +178,13 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
+    [`@media ${mediaQueries.mobile}`]: {
+      width: 'auto',
+      paddingBottom: '100px',
+    },
   },
   conteinerType: {
     display: 'flex',
@@ -162,6 +196,8 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
+    borderBottom: '1px solid #DADAF0',
+    width: '100%',
     [`@media ${mediaQueries.mobile}`]: {
       flexDirection: 'column',
       alignItems: 'initial',
@@ -171,15 +207,24 @@ const styles = {
   boxQuest: {
     marginRight: '20px',
     color: colors.PRIMARY,
+    width: '400px',
     [`@media ${mediaQueries.mobile}`]: {
+      width: 'auto',
       marginRight: '0px',
-      fontSize: '12px',
+      fontSize: '14px',
       height: '30px',
+      textWeight: 500,
     },
   },
   boxAnswers: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  counter: {
+    [`@media ${mediaQueries.mobile}`]: {
+      paddingTop: '10px',
+      paddingBottom: '10px',
+    },
   },
 };
 

@@ -209,6 +209,24 @@ const Page12 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true)
+            || (answer.answer[6].checked === true)
+            || (answer.answer[7].checked === true)
+            || (answer.answer[8].checked === true)
+            || (answer.answer[9].checked === true)
+            || (answer.answer[10].checked === true)
+            || (answer.answer[11].checked === true))}
+          onClick={() => getNamesOnlyTrue()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
@@ -220,22 +238,6 @@ const Page12 = (props) => {
           />
         </div>
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true)
-          || (answer.answer[6].checked === true)
-          || (answer.answer[7].checked === true)
-          || (answer.answer[8].checked === true)
-          || (answer.answer[9].checked === true)
-          || (answer.answer[10].checked === true)
-          || (answer.answer[11].checked === true))}
-        onClick={() => getNamesOnlyTrue()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -243,37 +245,19 @@ const Page12 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allListItems: {
     display: 'flex',
-    // width: '600px',
-    // flexDirection: 'column',
     flexWrap: 'wrap',
   },
-  // checkbox: {
-  //   [`@media ${mediaQueries.mobile}`]: {
-  //     width: '50%',
-  //   },
-  //   width: '33%',
-  // },
   listItem: {
-    // width: '350px',
     width: '50%',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   // border: '1px solid black',
-  //   paddingTop: '5px',
-  //   // paddingLeft: '20px',
-  //   // paddingRight: '20px',
-  //   // paddingBottom: '15px',
-  //   marginBottom: '40px',
-  //   marginLeft: '20px',
-  //   marginRight: '20px',
   },
   nameAndCheckbox: {
     display: 'flex',
@@ -286,7 +270,6 @@ const styles = {
   },
   image: {
     width: '250px',
-    // height: '70px',
   },
   comments: {
     width: '100%',

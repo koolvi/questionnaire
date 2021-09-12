@@ -45,7 +45,7 @@ const Page15 = (props) => {
     return (
       <div className={classes.allCheckboxes}>
         {answer.answer.map(item => (
-          <div className={classes.checkbox} key={item.id}>
+          <div key={item.id}>
             <CheckboxLabel
               checked={item.checked}
               label={item.type}
@@ -62,10 +62,22 @@ const Page15 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true))}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
-        <div className={classes.comments}>
+        <div>
           <MultilineInput
             label="Комментарии"
             value={answer.comments}
@@ -73,16 +85,6 @@ const Page15 = (props) => {
           />
         </div>
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true))}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -90,27 +92,17 @@ const Page15 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allCheckboxes: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '300px',
     gridTemplateRows: 'repeat(6, 33px)',
-  },
-  checkbox: {
-    [`@media ${mediaQueries.mobile}`]: {
-      // width: '50%',
-    },
-    // width: '33%',
-  },
-  comments: {
-    // width: '100%',
   },
 };
 

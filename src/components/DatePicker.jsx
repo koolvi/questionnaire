@@ -1,11 +1,9 @@
 import 'date-fns';
 import React from 'react';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+
 
 export default function MaterialUIPickers(props) {
   const { value, handleDate } = props;
@@ -13,18 +11,15 @@ export default function MaterialUIPickers(props) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
-        <KeyboardDatePicker
-          minDate={new Date()}
+        <DatePicker
+          autoOk
           disableToolbar
-          variant="inline"
-          format="dd/MM/yyyy"
-          margin="normal"
-          id="date-picker-inline"
+          minDate={new Date()}
+          orientation="landscape"
+          variant="static"
+          openTo="date"
           value={value}
           onChange={handleDate}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
         />
       </Grid>
     </MuiPickersUtilsProvider>

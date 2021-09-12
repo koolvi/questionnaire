@@ -59,7 +59,7 @@ const Page26 = (props) => {
     return (
       <div className={classes.allCheckboxes}>
         {answer.answer.map(item => (
-          <div className={classes.checkbox} key={item.id}>
+          <div key={item.id}>
             <CheckboxLabel
               checked={item.checked}
               label={item.name}
@@ -77,6 +77,12 @@ const Page26 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={checkForDisabled()}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         <div className={classes.containerSwitch}>
@@ -88,10 +94,6 @@ const Page26 = (props) => {
         </div>
         {renderContent()}
       </div>
-      <Button
-        disabled={checkForDisabled()}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -99,10 +101,12 @@ const Page26 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
+      paddingBottom: '120px',
     },
   },
   containerSwitch: {
@@ -111,8 +115,6 @@ const styles = {
     },
   },
   allCheckboxes: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '300px 450px',
     gridTemplateRows: 'repeat(7, 35px)',
@@ -121,12 +123,6 @@ const styles = {
       gridTemplateRows: 'repeat(14, 50px)',
       width: '100%',
     },
-  },
-  checkbox: {
-    [`@media ${mediaQueries.mobile}`]: {
-      // width: '50%',
-    },
-    // width: '50%',
   },
 };
 

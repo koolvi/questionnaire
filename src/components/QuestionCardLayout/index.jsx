@@ -10,6 +10,7 @@ const QuestionCardLayout = (props) => {
     questionNumber,
     questionText,
     disableMarginPadding = false,
+    button = false,
     onClickBack,
     children,
   } = props;
@@ -19,14 +20,13 @@ const QuestionCardLayout = (props) => {
       <QuestionNumber questionNumber={questionNumber} onClickBack={onClickBack} />
       <div
         className={classes.contentContainer}
-        style={{
-          paddingRight: disableMarginPadding ? '0px' : '30px',
-          paddingLeft: disableMarginPadding ? '0px' : '30px',
-        }}
       >
         <div className={classes.obertka}>
           <QuestionText disableMarginPaddingIn18Page={disableMarginPadding} text={questionText} />
           {children}
+          <div className={classes.button}>
+            {button}
+          </div>
         </div>
       </div>
     </div>
@@ -38,14 +38,13 @@ const styles = {
     minWidth: '800px',
     maxWidth: '1000px',
     [`@media ${mediaQueries.mobile}`]: {
+      height: '100vh',
       width: '100%',
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
       minWidth: 'auto',
       maxWidth: 'auto',
-      position: 'fixed',
-      top: 0,
     },
   },
   contentContainer: {
@@ -67,6 +66,24 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
+    [`@media ${mediaQueries.mobile}`]: {
+      overflowY: 'auto',
+    },
+  },
+  button: {
+    [`@media ${mediaQueries.mobile}`]: {
+      position: 'absolute',
+      bottom: 20,
+      height: '40px',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+      background: 'white',
+      paddingBottom: '20px',
+      paddingTop: '20px',
+      zIndex: 10,
+      boxShadow: '0px 1px 10px 0px rgba(0,0,0,0.2)',
+    },
   },
 };
 

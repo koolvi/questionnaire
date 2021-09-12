@@ -62,7 +62,6 @@ const Page25 = (props) => {
             </Typography>
             <Counter
               value={item.value}
-              // textLeft={item.name}
               onClick={newValue => handleValue(item, newValue)}
             />
           </div>
@@ -76,6 +75,9 @@ const Page25 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button onClick={() => getListOfRequiredPremises()} />
+      )}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -89,7 +91,6 @@ const Page25 = (props) => {
           </div>
         </div>
       </div>
-      <Button onClick={() => getListOfRequiredPremises()} />
     </QuestionCardLayout>
   );
 };
@@ -100,6 +101,7 @@ const styles = {
     marginBottom: '30px',
     display: 'flex',
     justifyContent: 'flex-start',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
       flex: 1,
@@ -109,27 +111,27 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
+      paddingBottom: '150px',
     },
   },
   allVariantsAnswers: {
     display: 'grid',
     gridTemplateColumns: '170px 170px 250px',
+    gridColumnGap: '50px',
     [`@media ${mediaQueries.mobile}`]: {
       gridTemplateColumns: '100%',
       gridTemplateRows: 'repeat(14, 35px)',
       width: '100%',
     },
-    gridColumnGap: '50px',
   },
   variantAnswer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    [`@media ${mediaQueries.mobile}`]: {
-      // width: '50%',
-    },
   },
   comments: {
     width: '100%',

@@ -90,14 +90,16 @@ const Page20 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={checkForDisabled()}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={checkForDisabled()}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -105,10 +107,11 @@ const Page20 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allCheckboxes: {

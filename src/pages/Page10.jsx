@@ -6,7 +6,6 @@ import MultilineInput from '../components/MultilineInput';
 import Counter from '../components/Counter';
 import mediaQueries from '../mediaQueries';
 import QuestionCardLayout from '../components/QuestionCardLayout/index';
-// import { Repeat } from '@material-ui/icons';
 
 
 const Page10 = (props) => {
@@ -140,6 +139,12 @@ const Page10 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      button={(
+        <Button
+          // disabled={checkEmptyAnswer()}
+          onClick={() => getListOfRequiredPremises()}
+        />
+      )}
       onClickBack={onClickBack}
     >
       <div className={classes.conteinerAnswer}>
@@ -154,12 +159,6 @@ const Page10 = (props) => {
           </div>
         </div>
       </div>
-      {/* <div className={classes.button}> */}
-      <Button
-        // disabled={checkEmptyAnswer()}
-        onClick={() => getListOfRequiredPremises()}
-      />
-      {/* </div> */}
     </QuestionCardLayout>
   );
 };
@@ -179,8 +178,11 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
       width: '100%',
+      paddingBottom: '150px',
     },
   },
   allVariantsAnswers: {
@@ -188,7 +190,6 @@ const styles = {
     gridTemplateColumns: '250px 200px 250px',
     gridColumnGap: '40px',
     [`@media ${mediaQueries.mobile}`]: {
-      // background: 'red',
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
@@ -202,15 +203,6 @@ const styles = {
   comments: {
     width: '100%',
   },
-  // button: {
-  //   [`@media ${mediaQueries.mobile}`]: {
-  //     position: 'fixed',
-  //     bottom: 70,
-  //     display: 'flex',
-  //     justifyContent: 'center',
-  //     width: '100%',
-  //   },
-  // },
 };
 
 export default withStyles(styles)(Page10);

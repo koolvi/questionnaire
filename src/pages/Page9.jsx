@@ -23,6 +23,19 @@ const Page9 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={(answer.answer.variantAnswer.length === 0)}
+          onClick={() => onClickNext({
+            id: answer.id,
+            question: answer.question,
+            answer: [
+              { Ответ: answer.answer.variantAnswer },
+              { 'Кол-во': answer.answer.windowsCount },
+            ],
+          })}
+        />
+      )}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -61,17 +74,6 @@ const Page9 = (props) => {
           </div>
         </div>
       </div>
-      <Button
-        disabled={(answer.answer.variantAnswer.length === 0)}
-        onClick={() => onClickNext({
-          id: answer.id,
-          question: answer.question,
-          answer: [
-            { Ответ: answer.answer.variantAnswer },
-            { 'Кол-во': answer.answer.windowsCount },
-          ],
-        })}
-      />
     </QuestionCardLayout>
   );
 };
@@ -92,6 +94,11 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: 'auto',
+    },
   },
   answerYes: {
     display: 'flex',

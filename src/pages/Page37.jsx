@@ -17,10 +17,10 @@ const Page37 = (props) => {
       { id: 2, name: 'Повышение комфорта и уюта', checked: false },
       { id: 3, name: 'Увеличение мест хранения', checked: false },
       { id: 4, name: 'Эргономичность интерьера', checked: false },
-      { id: 5, name: 'Высокотехнологичный интерьер (современные инновации)', checked: false },
+      { id: 5, name: 'Яркий интерьер', checked: false },
       { id: 6, name: 'Спокойный интерьер', checked: false },
       { id: 7, name: 'Экстравагантный интерьер', checked: false },
-      { id: 8, name: 'Яркий интерьер', checked: false },
+      { id: 8, name: 'Высокотехнологичный интерьер (современные инновации)', checked: false },
     ],
     comments: '',
   });
@@ -60,23 +60,25 @@ const Page37 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true)
+            || (answer.answer[6].checked === true)
+            || (answer.answer[7].checked === true)
+            || (answer.answer[8].checked === true))}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true)
-          || (answer.answer[6].checked === true)
-          || (answer.answer[7].checked === true)
-          || (answer.answer[8].checked === true))}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -84,10 +86,12 @@ const Page37 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
+      paddingBottom: '120px',
     },
   },
   allCheckboxes: {
@@ -96,7 +100,7 @@ const styles = {
     gridTemplateRows: 'repeat(9, 33px)',
     [`@media ${mediaQueries.mobile}`]: {
       gridTemplateColumns: '100%',
-      gridTemplateRows: 'repeat(9, 50px)',
+      gridTemplateRows: 'repeat(9, 35px)',
       width: '100%',
     },
   },

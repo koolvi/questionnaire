@@ -24,11 +24,15 @@ const styles = {
     marginTop: '40px',
     position: 'fixed',
     bottom: 0,
-    // background: 'red',
+    [`@media ${mediaQueries.mobile}`]: {
+      background: 'white',
+      height: '30px',
+      marginTop: '0px',
+      zIndex: 10,
+    },
   },
   text: {
     color: '#9e9e9e',
-    // fontFamily: 'Courier',
     textTransform: 'uppercase',
     letterSpacing: '5px',
     fontSize: '15px',

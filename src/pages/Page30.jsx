@@ -63,26 +63,28 @@ const Page30 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true)
+            || (answer.answer[6].checked === true)
+            || (answer.answer[7].checked === true)
+            || (answer.answer[8].checked === true)
+            || (answer.answer[9].checked === true)
+            || (answer.answer[10].checked === true)
+            || (answer.answer[11].checked === true))}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true)
-          || (answer.answer[6].checked === true)
-          || (answer.answer[7].checked === true)
-          || (answer.answer[8].checked === true)
-          || (answer.answer[9].checked === true)
-          || (answer.answer[10].checked === true)
-          || (answer.answer[11].checked === true))}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -90,10 +92,11 @@ const Page30 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allCheckboxes: {

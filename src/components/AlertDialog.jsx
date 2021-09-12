@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { CheckCircle, Cancel } from '@material-ui/icons';
-// import mediaQueries from '../mediaQueries';
+import mediaQueries from '../mediaQueries';
 import Button from './Button';
 
 
@@ -46,7 +46,7 @@ const AlertDialog = (props) => {
                   Ооой!
                 </div>
                 <div className={classes.part2} style={{ color: '#8c8c8c' }}>
-                  Что-то пошло не так.. Попробуйте еще разок
+                  Что-то пошло не так.. Попробуйте еще раз
                 </div>
               </div>
             )
@@ -73,6 +73,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '40px',
+    [`@media ${mediaQueries.mobile}`]: {
+      marginTop: '30px',
+    },
   },
   content: {
     display: 'flex',
@@ -81,10 +84,16 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '30px',
+    [`@media ${mediaQueries.mobile}`]: {
+      width: 'auto',
+    },
   },
   part1: {
     fontWeight: 'bold',
     fontSize: '22px',
+    [`@media ${mediaQueries.mobile}`]: {
+      fontSize: '16px',
+    },
   },
   part2: {
     marginTop: '20px',
@@ -92,6 +101,9 @@ const styles = {
     color: 'gray',
     textAlign: 'center',
     fontSize: '15px',
+    [`@media ${mediaQueries.mobile}`]: {
+      fontSize: '12px',
+    },
   },
   button: {
     marginTop: '30px',

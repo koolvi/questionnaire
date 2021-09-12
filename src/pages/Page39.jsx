@@ -19,6 +19,12 @@ const Page39 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={(answer.answer === null)}
+          onClick={() => onClickNext(answer)}
+        />
+      )}
     >
       <div className={classes.answer}>
         <DatePicker
@@ -27,10 +33,6 @@ const Page39 = (props) => {
           handleDate={selectedDate => setAnswer({ ...answer, answer: selectedDate })}
         />
       </div>
-      <Button
-        disabled={(answer.answer === null)}
-        onClick={() => onClickNext(answer)}
-      />
     </QuestionCardLayout>
   );
 };
@@ -38,10 +40,13 @@ const Page39 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
+      paddingLeft: 'inherit',
+      paddingRight: 'inherit',
     },
   },
 };

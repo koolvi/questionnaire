@@ -9,12 +9,7 @@ const Page1 = (props) => {
   const { classes, onClickNext } = props;
   const [answer, setAnswer] = useState({
     id: 1,
-    question: 'Тут написан какой-то приветствующий текст, который предлагает пройти тест из 40+ вопросов',
-    // answer: {
-    //   name: '',
-    //   email: '',
-    //   phone: '',
-    // },
+    question: 'Заполните анкету для дизайнера. Всего будет 47 вопросов',
     answer: {
       field0: { quest: 'ФИО', answ: '' },
       field1: { quest: 'Email', answ: '' },
@@ -37,11 +32,27 @@ const Page1 = (props) => {
     <QuestionCardLayout
       questionNumber={answer.id}
       questionText={answer.question}
+      button={(
+        <Button
+          disabled={(
+            (answer.answer.field0.answ.length === 0)
+            || (answer.answer.field1.answ.length === 0)
+            || (answer.answer.field2.answ.length === 0))}
+          onClick={() => onClickNext({
+            id: 1,
+            question: 'Контактная информация',
+            answer: [
+              { [answer.answer.field0.quest]: answer.answer.field0.answ },
+              { [answer.answer.field1.quest]: answer.answer.field1.answ },
+              { [answer.answer.field2.quest]: answer.answer.field2.answ },
+            ],
+          })}
+        />
+      )}
     >
       <div className={classes.answer}>
         <TextFieldInput
           label="ФИО"
-          // value={answer.answer.name}
           value={answer.answer.field0.answ}
           onChange={writingText => setAnswer({
             ...answer,
@@ -67,21 +78,6 @@ const Page1 = (props) => {
           onChange={writingText => getOnlyNumber(writingText)}
         />
       </div>
-      <Button
-        disabled={(
-          (answer.answer.field0.answ.length === 0)
-          || (answer.answer.field1.answ.length === 0)
-          || (answer.answer.field2.answ.length === 0))}
-        onClick={() => onClickNext({
-          id: 1,
-          question: 'Контактная информация',
-          answer: [
-            { [answer.answer.field0.quest]: answer.answer.field0.answ },
-            { [answer.answer.field1.quest]: answer.answer.field1.answ },
-            { [answer.answer.field2.quest]: answer.answer.field2.answ },
-          ],
-        })}
-      />
     </QuestionCardLayout>
   );
 };
@@ -91,10 +87,11 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
 };

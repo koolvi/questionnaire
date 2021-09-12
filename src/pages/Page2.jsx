@@ -37,6 +37,24 @@ const Page2 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={((answer.answer.address.length === 0)
+            || (answer.answer.square.length === 0)
+            || (answer.answer.floor.length === 0)
+            || (answer.answer.roomsCount.length === 0))}
+          onClick={() => onClickNext({
+            id: 2,
+            question: 'Информация об объекте',
+            answer: [
+              { Адрес: answer.answer.address },
+              { Площадь: answer.answer.square },
+              { Этаж: answer.answer.floor },
+              { 'Кол-во комнат': answer.answer.roomsCount },
+            ],
+          })}
+        />
+      )}
     >
       <div className={classes.answer}>
         <TextFieldInput
@@ -102,22 +120,6 @@ const Page2 = (props) => {
         </Select>
 
       </div>
-      <Button
-        disabled={((answer.answer.address.length === 0)
-          || (answer.answer.square.length === 0)
-          || (answer.answer.floor.length === 0)
-          || (answer.answer.roomsCount.length === 0))}
-        onClick={() => onClickNext({
-          id: 2,
-          question: 'Информация об объекте',
-          answer: [
-            { Адрес: answer.answer.address },
-            { Площадь: answer.answer.square },
-            { Этаж: answer.answer.floor },
-            { 'Кол-во комнат': answer.answer.roomsCount },
-          ],
-        })}
-      />
     </QuestionCardLayout>
   );
 };
@@ -127,10 +129,11 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   containerInputs: {

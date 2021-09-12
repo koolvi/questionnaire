@@ -20,6 +20,12 @@ const Page42 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={(answer.answer.length === 0)}
+          onClick={() => onClickNext(answer)}
+        />
+      )}
     >
       <div className={classes.answer}>
         <RadioGroup
@@ -31,10 +37,6 @@ const Page42 = (props) => {
           ]}
         />
       </div>
-      <Button
-        disabled={(answer.answer.length === 0)}
-        onClick={() => onClickNext(answer)}
-      />
     </QuestionCardLayout>
   );
 };
@@ -42,13 +44,13 @@ const Page42 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
     flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
 };

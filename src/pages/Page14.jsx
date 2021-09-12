@@ -10,7 +10,7 @@ const Page14 = (props) => {
   const { classes, onClickNext, onClickBack } = props;
   const [answer, setAnswer] = useState({
     id: 14,
-    question: 'Выберите цвета, которые не стоит использовать в интерьере (цвета, которые не нравятся)',
+    question: 'Выберите цвета, которые НЕ стоит использовать в интерьере (цвета, которые не нравятся)',
     answer: [
       { id: 0, color: 'белый', checked: false },
       { id: 1, color: 'желтый', checked: false },
@@ -69,33 +69,35 @@ const Page14 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true)
+            || (answer.answer[6].checked === true)
+            || (answer.answer[7].checked === true)
+            || (answer.answer[8].checked === true)
+            || (answer.answer[9].checked === true)
+            || (answer.answer[10].checked === true)
+            || (answer.answer[11].checked === true)
+            || (answer.answer[12].checked === true)
+            || (answer.answer[13].checked === true)
+            || (answer.answer[14].checked === true)
+            || (answer.answer[15].checked === true)
+            || (answer.answer[16].checked === true)
+            || (answer.answer[17].checked === true)
+            || (answer.answer[18].checked === true))}
+          onClick={() => getColorsOnlyTrue()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true)
-          || (answer.answer[6].checked === true)
-          || (answer.answer[7].checked === true)
-          || (answer.answer[8].checked === true)
-          || (answer.answer[9].checked === true)
-          || (answer.answer[10].checked === true)
-          || (answer.answer[11].checked === true)
-          || (answer.answer[12].checked === true)
-          || (answer.answer[13].checked === true)
-          || (answer.answer[14].checked === true)
-          || (answer.answer[15].checked === true)
-          || (answer.answer[16].checked === true)
-          || (answer.answer[17].checked === true)
-          || (answer.answer[18].checked === true))}
-        onClick={() => getColorsOnlyTrue()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -103,10 +105,11 @@ const Page14 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allCheckboxes: {

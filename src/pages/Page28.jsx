@@ -22,6 +22,9 @@ const Page28 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button onClick={() => onClickNext(answer)} />
+      )}
     >
       <div className={classes.answer}>
         <MultilineInput
@@ -38,7 +41,6 @@ const Page28 = (props) => {
           </Typography>
         </div>
       </div>
-      <Button onClick={() => onClickNext(answer)} />
     </QuestionCardLayout>
   );
 };
@@ -46,11 +48,11 @@ const Page28 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
     flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   example: {

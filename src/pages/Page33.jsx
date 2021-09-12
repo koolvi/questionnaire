@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -105,6 +104,12 @@ const Page33 = (props) => {
       questionNumber={answer.id}
       questionText="Какие работы необходимо выполнить с радиаторами?"
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={(answer.answer.length === 0)}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.conteinerAnswer}>
         <div className={classes.answer}>
@@ -128,11 +133,6 @@ const Page33 = (props) => {
           </div>
         </div>
       </div>
-      {/* <Button onClick={() => onClickNext({ id: 33, answer: answer.answer, comments: answer.comments })} /> */}
-      <Button
-        disabled={(answer.answer.length === 0)}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -153,6 +153,13 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
+    [`@media ${mediaQueries.mobile}`]: {
+      width: 'auto',
+      paddingBottom: '150px',
+    },
   },
   allVariantsAnswers: {
     display: 'flex',
@@ -160,7 +167,6 @@ const styles = {
     marginTop: '20px',
     width: '100%',
     alignItems: 'center',
-    // flexWrap: 'wrap',
   },
   quest: {
     color: '#3f51b5',
@@ -168,14 +174,8 @@ const styles = {
   },
   variantAnswer: {
     display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
     width: '100%',
-    // width: '60%',
     marginBottom: '10px',
-    [`@media ${mediaQueries.mobile}`]: {
-      // width: '60%',
-    },
   },
   nameBeforecounter: {
     display: 'flex',

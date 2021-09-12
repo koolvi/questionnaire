@@ -12,7 +12,7 @@ const Page31 = (props) => {
     id: 31,
     question: 'Где необходимо сделать теплые полы?',
     answer: [
-      { id: 0, name: 'Ни в каких', checked: false },
+      { id: 0, name: 'Нигде', checked: false },
       { id: 1, name: 'Спальня', checked: false },
       { id: 2, name: 'Гостиная', checked: false },
       { id: 3, name: 'Прихожая', checked: false },
@@ -31,7 +31,6 @@ const Page31 = (props) => {
       { id: 16, name: 'Столовая', checked: false },
       { id: 17, name: 'Кинотеатр', checked: false },
     ],
-    // comments: '',
   });
   const [isDisabledAnswers, setDisabledAnswers] = useState(false);
 
@@ -94,14 +93,16 @@ const Page31 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={checkForDisabled()}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={checkForDisabled()}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -109,10 +110,12 @@ const Page31 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
+      paddingBottom: '120px',
     },
   },
   allCheckboxes: {
@@ -121,7 +124,8 @@ const styles = {
   },
   checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      width: '50%',
+      width: '100%',
+      height: '30px',
     },
     width: '33%',
   },

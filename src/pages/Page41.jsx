@@ -41,7 +41,7 @@ const Page41 = (props) => {
     return (
       <div className={classes.allCheckboxes}>
         {answer.answer.map(item => (
-          <div className={classes.checkbox} key={item.id}>
+          <div key={item.id}>
             <CheckboxLabel
               checked={item.checked}
               label={item.name}
@@ -58,21 +58,23 @@ const Page41 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={!(
+            (answer.answer[0].checked === true)
+            || (answer.answer[1].checked === true)
+            || (answer.answer[2].checked === true)
+            || (answer.answer[3].checked === true)
+            || (answer.answer[4].checked === true)
+            || (answer.answer[5].checked === true)
+            || (answer.answer[6].checked === true))}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {renderContent()}
       </div>
-      <Button
-        disabled={!(
-          (answer.answer[0].checked === true)
-          || (answer.answer[1].checked === true)
-          || (answer.answer[2].checked === true)
-          || (answer.answer[3].checked === true)
-          || (answer.answer[4].checked === true)
-          || (answer.answer[5].checked === true)
-          || (answer.answer[6].checked === true))}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -80,24 +82,19 @@ const Page41 = (props) => {
 const styles = {
   answer: {
     marginBottom: '50px',
-    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
     },
   },
   allCheckboxes: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
     display: 'grid',
     gridTemplateColumns: '400px',
     gridTemplateRows: 'repeat(7, 33px)',
-  },
-  checkbox: {
     [`@media ${mediaQueries.mobile}`]: {
-      // width: '50%',
+      gridTemplateColumns: 'auto',
     },
-    // width: '33%',
   },
 };
 

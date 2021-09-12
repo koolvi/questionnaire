@@ -130,6 +130,12 @@ const Page13 = (props) => {
       questionNumber={answer.id}
       questionText={answer.question}
       onClickBack={onClickBack}
+      button={(
+        <Button
+          disabled={checkForDisabled()}
+          onClick={() => getAnswer()}
+        />
+      )}
     >
       <div className={classes.answer}>
         {(answer.answer.length !== 0) ? renderContent() : null}
@@ -152,10 +158,6 @@ const Page13 = (props) => {
         </div>
 
       </div>
-      <Button
-        disabled={checkForDisabled()}
-        onClick={() => getAnswer()}
-      />
     </QuestionCardLayout>
   );
 };
@@ -165,10 +167,12 @@ const styles = {
     marginBottom: '50px',
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    flex: 1,
+    paddingLeft: '30px',
+    paddingRight: '30px',
     [`@media ${mediaQueries.mobile}`]: {
-      width: '100%',
-      flex: 1,
+      width: 'auto',
+      paddingBottom: '150px',
     },
   },
   select: {
