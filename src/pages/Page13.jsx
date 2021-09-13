@@ -18,7 +18,6 @@ const Page13 = (props) => {
     answer: [
       {
         id: 0,
-        name: 'Человек №1',
         color: '',
       },
     ],
@@ -48,15 +47,20 @@ const Page13 = (props) => {
   ]);
 
   const renderColors = () => {
-    return colors.map(item => (
-      <MenuItem key={item.id} value={item.color}>{item.color}</MenuItem>
-    ));
+    return colors
+      .sort((color1, color2) => {
+        if (color1.color < color2.color) { return -1; }
+        if (color1.color > color2.color) { return 1; }
+        return 0;
+      })
+      .map(item => (
+        <MenuItem key={item.id} value={item.color}>{item.color}</MenuItem>
+      ));
   };
 
   const handleColorSelect = (people, colorSelectName) => {
     const newAnswer = answer.answer.map((item) => {
-      // global.console.log('item=', item);
-      if (item.id === people.id) return { id: item.id, name: item.name, color: colorSelectName };
+      if (item.id === people.id) return { ...item, color: colorSelectName };
       return item;
     });
     global.console.log('newAnswer=', newAnswer);
@@ -64,11 +68,9 @@ const Page13 = (props) => {
   };
 
   const getAnswer = () => {
-    // const correcAnswer = answer.answer.reduce(
-    //   ((acc, item) => ({ ...acc, [item.name]: item.color })),
-    //   {},
-    // );
-    const namesAndValues = answer.answer.map(item => ({ [item.name]: item.color }));
+    const namesAndValues = answer.answer.map((item, index) => ({
+      [`Человек №${index + 1}`]: item.color,
+    }));
     onClickNext({ ...answer, answer: namesAndValues });
   };
 
@@ -86,12 +88,12 @@ const Page13 = (props) => {
   const renderContent = () => {
     return (
       <div className={classes.containerContent}>
-        {answer.answer.map(item => (
+        {answer.answer.map((item, index) => (
           <div className={classes.containerMini} key={item.id}>
 
             <Select
               label="Предпочитаемый цвет"
-              helperText={item.name}
+              helperText={`Человек №${index + 1}`}
               value={item.color}
               className={classes.select}
               onChange={e => handleColorSelect(item, e.target.value)}
@@ -118,7 +120,6 @@ const Page13 = (props) => {
   const addNewPeople = () => {
     const newAnswer = answer.answer.concat({
       id: counter,
-      name: `Человек №${counter + 1}`,
       color: '',
     });
     setAnswer({ ...answer, answer: newAnswer });

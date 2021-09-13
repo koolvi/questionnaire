@@ -42,6 +42,16 @@ const Page25 = (props) => {
     setAnswer({ ...answer, answer: newAnswer });
   };
 
+  const checkEmptyAnswer = () => {
+    const arrNoEmptyAnswers = answer.answer.filter((item) => {
+      if (item.value !== 0) return true;
+      return false;
+    });
+
+    if (arrNoEmptyAnswers.length === 0) return true;
+    return false;
+  };
+
   // получить список необходимых помещений (у которых кол-во НЕ ноль)
   const getListOfRequiredPremises = () => {
     const newAnswer = answer.answer.filter(item => (item.value !== 0));
@@ -76,7 +86,10 @@ const Page25 = (props) => {
       questionText={answer.question}
       onClickBack={onClickBack}
       button={(
-        <Button onClick={() => getListOfRequiredPremises()} />
+        <Button
+          disabled={checkEmptyAnswer()}
+          onClick={() => getListOfRequiredPremises()}
+        />
       )}
     >
       <div className={classes.conteinerAnswer}>

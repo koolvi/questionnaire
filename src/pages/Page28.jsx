@@ -23,7 +23,10 @@ const Page28 = (props) => {
       questionText={answer.question}
       onClickBack={onClickBack}
       button={(
-        <Button onClick={() => onClickNext(answer)} />
+        <Button
+          disabled={answer.answer.length < 2}
+          onClick={() => onClickNext(answer)}
+        />
       )}
     >
       <div className={classes.answer}>

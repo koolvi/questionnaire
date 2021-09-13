@@ -50,6 +50,8 @@ const Page10 = (props) => {
     ],
   });
 
+  const wholeList = [...column1.variantAnswer, ...column2.variantAnswer, ...column3.variantAnswer];
+
   const handleValue = (variantAnswer, newValue, column, setColumn) => {
     const newAnswer = column.variantAnswer.map((item) => {
       if (item.id === variantAnswer.id) {
@@ -58,33 +60,27 @@ const Page10 = (props) => {
       return item;
     });
     setColumn({ variantAnswer: newAnswer });
-    // setAnswer({ ...answer, answer: newAnswer });
   };
 
   // получить список необходимых помещений (у которых кол-во НЕ ноль)
   const getListOfRequiredPremises = () => {
-    global.console.log('aaaaaaaaaaaaaaaaaaaaa');
-    const arr1 = column1.variantAnswer.filter(item => (item.value !== 0));
-    const arr2 = column2.variantAnswer.filter(item => (item.value !== 0));
-    const arr3 = column3.variantAnswer.filter(item => (item.value !== 0));
-    const newAnswer = [...arr1, ...arr2, ...arr3];
-    global.console.log('qqqqqqq', arr1, arr2, arr3, newAnswer);
+    const nonZero = wholeList.filter(item => (item.value !== 0));
     // массив, где элемент - это объект вида: {кухня: 2}
-    const namesAndValuesArr = newAnswer.map(item => ({ [item.name]: item.value }));
+    const namesAndValuesArr = nonZero.map(item => ({ [item.name]: item.value }));
     // массив, где перечеслены все помещения и их кол-во + комментарий
     // const namesAndValuesAndCommentArr = namesAndValuesArr.concat(answer.comments);
     onClickNext({ ...answer, answer: namesAndValuesArr });
   };
 
-  // const checkEmptyAnswer = () => {
-  //   const arrNoEmptyAnswers = answer.answer.filter((item) => {
-  //     if (item.value !== 0) return true;
-  //     return false;
-  //   });
+  const checkEmptyAnswer = () => {
+    const arrNoEmptyAnswers = wholeList.filter((item) => {
+      if (item.value !== 0) return true;
+      return false;
+    });
 
-  //   if (arrNoEmptyAnswers.length === 0) return true;
-  //   return false;
-  // };
+    if (arrNoEmptyAnswers.length === 0) return true;
+    return false;
+  };
 
   const renderContent = () => {
     return (
@@ -94,7 +90,6 @@ const Page10 = (props) => {
             <div className={classes.variantAnswer} key={item.id}>
               <Counter
                 value={item.value}
-                // textLeft={item.name}
                 onClick={newValue => handleValue(item, newValue, column1, setColumn1)}
               />
               <Typography variant="body2">
@@ -141,7 +136,7 @@ const Page10 = (props) => {
       questionText={answer.question}
       button={(
         <Button
-          // disabled={checkEmptyAnswer()}
+          disabled={checkEmptyAnswer()}
           onClick={() => getListOfRequiredPremises()}
         />
       )}
