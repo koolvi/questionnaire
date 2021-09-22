@@ -103,7 +103,7 @@ const styles = {
     flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       width: 'auto',
-      paddingBottom: '120px',
+      paddingBottom: '20px',
     },
   },
   allCheckboxes: {
@@ -113,6 +113,7 @@ const styles = {
       display: 'grid',
       gridTemplateColumns: '100%',
       gridTemplateRows: 'repeat(15, 30px)',
+      rowGap: 16,
       width: '100%',
     },
   },

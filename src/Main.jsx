@@ -299,7 +299,7 @@ const styles = {
     [`@media ${mediaQueries.mobile}`]: {
       // alignItems: 'none',
       justifyContent: 'flex-start',
-      height: 'auto',
+      height: '100%',
       // flexDirection: 'column',
       // paddingLeft: '20px',
       // paddingTop: '30px',

@@ -45,6 +45,7 @@ const styles = {
       flexDirection: 'column',
       minWidth: 'auto',
       maxWidth: 'auto',
+      overflowY: 'hidden',
     },
   },
   contentContainer: {
@@ -57,6 +58,7 @@ const styles = {
       height: 'auto',
       flex: 1,
       width: '100%',
+      maxHeight: 'initial',
       boxSizing: 'border-box',
     },
   },
@@ -68,6 +70,7 @@ const styles = {
     flex: 1,
     [`@media ${mediaQueries.mobile}`]: {
       overflowY: 'auto',
+      paddingBottom: 60,
     },
   },
   button: {
